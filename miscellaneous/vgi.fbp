@@ -179,7 +179,7 @@
                                         <event name="OnMiddleDClick"></event>
                                         <event name="OnMiddleDown"></event>
                                         <event name="OnMiddleUp"></event>
-                                        <event name="OnMotion"></event>
+                                        <event name="OnMotion">m_workspaceOnMotion</event>
                                         <event name="OnMouseEvents"></event>
                                         <event name="OnMouseWheel"></event>
                                         <event name="OnPaint"></event>
@@ -188,7 +188,7 @@
                                         <event name="OnRightUp"></event>
                                         <event name="OnSetFocus"></event>
                                         <event name="OnSize"></event>
-                                        <event name="OnUpdateUI"></event>
+                                        <event name="OnUpdateUI">m_workspaceOnUpdateUI</event>
                                     </object>
                                 </object>
                             </object>
@@ -252,7 +252,7 @@
                                         <property name="resize">Resizable</property>
                                         <property name="show">1</property>
                                         <property name="size">800,100</property>
-                                        <property name="style"></property>
+                                        <property name="style">wxTE_PROCESS_ENTER|wxTE_PROCESS_TAB</property>
                                         <property name="subclass"></property>
                                         <property name="toolbar_pane">0</property>
                                         <property name="tooltip"></property>
