@@ -12,3 +12,12 @@ Panel::Panel(double x1, double y1, double x2, double y2) {
 void Panel::updateCoordinates(double x1, double y1, double x2, double y2) {
 
 }
+
+
+Point Panel::getLeftDownPoint() const {
+	return _leftDownPoint;
+}
+
+Point Panel::getRightUpPoint() const {
+	return _rightUpPoint;
+}

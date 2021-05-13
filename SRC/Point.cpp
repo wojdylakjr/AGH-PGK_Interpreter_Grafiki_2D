@@ -39,3 +39,5 @@ void Point::scalePoint(double dx, double dy) {
 	_x *= dx;
 	_y *= dy;
 }
+
+

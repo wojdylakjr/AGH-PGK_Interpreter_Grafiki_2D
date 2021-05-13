@@ -140,6 +140,11 @@ void VectorGraphicsInterpreterGUI::Repaint()
 	wxBufferedDC dc(&clientDc, m_picture);
 	width /= 2;
 	height /= 2;
+
+	int w = 0;
+	int h = 0;
+	m_workspace->GetSize(&w, &h);
+
 	dc.Clear();
 	dc.SetBackground(wxColor(255, 255, 255));
 	dc.SetBrush(wxBrush(wxColor(0, 1, 255)));
@@ -158,10 +163,16 @@ void VectorGraphicsInterpreterGUI::Repaint()
 	//wypisujemy rozmiar wektora _shapes, zwieksza sie ilosc po kazdym wywolaniu komendy line
 	std::string s1 = std::to_string(_shapes.size());
 	dc.DrawText(s1, 300, 200);
+	std::string s2 = std::to_string(w);
+	dc.DrawText(s2, 300, 300);
+
+
+	int Sx = (double)w / (_drawPanel.getRightUpPoint().getX() - _drawPanel.getLeftDownPoint().getX());
+	int Sy = (double)h / (_drawPanel.getRightUpPoint().getY() - _drawPanel.getLeftDownPoint().getY());
 
 	//rysujemy po kolei kazdy obiekt
 	for (Shape* shape : _shapes) {
-		shape->draw(&dc, 100, 100);
+		shape->draw(&dc, Sx, Sy);
 	}
 }
 
@@ -203,7 +214,7 @@ void VectorGraphicsInterpreterGUI::commandCircle(std::string instructions)
 void VectorGraphicsInterpreterGUI::commandLine(std::string instructions)
 {
 
-	Shape* firstLine = new Line (0, 0, 1, 1, wxColor(0, 0, 0));
+	Shape* firstLine = new Line (300, 100, 400, 500, wxColor(0, 64, 255));
 	_shapes.push_back(firstLine);
 
 }
