@@ -1,20 +1,18 @@
 #include "Shape.h"
-int Shape::_counter = 0;
+int Shape::m_counter = 0;
 
-Shape::Shape(){}
-Shape::Shape(wxColor color) : _color(color){
-	_id = _counter;
-	_counter++;
+Shape::Shape(wxColor color) : m_color(color) {
+	m_id = m_counter;
+	m_counter++;
 }
 
 void Shape::transform(double x, double y) {
-	_transformX += x;
-	_transformY += y;
+	m_transformX += x;
+	m_transformY += y;
 }
 
-void Shape::rotate(double angle, double x , double y) {
-	_rotateX = x; 
-	_rotateY = y; 
-	_rotateAngle = angle;
+void Shape::rotate(double angle, double x, double y) {
+	m_rotateX = x;
+	m_rotateY = y;
+	m_rotateAngle = angle;
 }
-

@@ -90,16 +90,16 @@ GUI::GUI( wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint&
 	this->Centre( wxBOTH );
 	
 	// Connect Events
-	m_workspace->Connect( wxEVT_MOTION, wxMouseEventHandler( GUI::m_workspaceOnMotion ), NULL, this );
-	m_workspace->Connect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( GUI::m_workspaceOnUpdateUI ), NULL, this );
-	m_console->Connect( wxEVT_COMMAND_TEXT_ENTER, wxCommandEventHandler( GUI::m_consoleOnTextEnter ), NULL, this );
+	m_workspace->Connect( wxEVT_MOTION, wxMouseEventHandler( GUI::workspaceOnMotion ), NULL, this );
+	m_workspace->Connect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( GUI::workspaceOnUpdateUI ), NULL, this );
+	m_console->Connect( wxEVT_COMMAND_TEXT_ENTER, wxCommandEventHandler( GUI::consoleOnTextEnter ), NULL, this );
 }
 
 GUI::~GUI()
 {
 	// Disconnect Events
-	m_workspace->Disconnect( wxEVT_MOTION, wxMouseEventHandler( GUI::m_workspaceOnMotion ), NULL, this );
-	m_workspace->Disconnect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( GUI::m_workspaceOnUpdateUI ), NULL, this );
-	m_console->Disconnect( wxEVT_COMMAND_TEXT_ENTER, wxCommandEventHandler( GUI::m_consoleOnTextEnter ), NULL, this );
+	m_workspace->Disconnect( wxEVT_MOTION, wxMouseEventHandler( GUI::workspaceOnMotion ), NULL, this );
+	m_workspace->Disconnect( wxEVT_UPDATE_UI, wxUpdateUIEventHandler( GUI::workspaceOnUpdateUI ), NULL, this );
+	m_console->Disconnect( wxEVT_COMMAND_TEXT_ENTER, wxCommandEventHandler( GUI::consoleOnTextEnter ), NULL, this );
 	
 }

@@ -1,30 +1,31 @@
 #include "Line.h"
-#include<vector>
 
-Line::Line(double x1, double y1, double x2, double y2, wxColor color) : Shape(color){
-	_startPoint.setX(x1);
-	_startPoint.setY(y1);
-	_endPoint.setX(x2);
-	_endPoint.setY(y2);
+#include <vector>
+
+Line::Line(double x1, double y1, double x2, double y2, wxColor color) : Shape(color) {
+	m_startPoint.setX(x1);
+	m_startPoint.setY(y1);
+	m_endPoint.setX(x2);
+	m_endPoint.setY(y2);
 
 }
 
 void Line::draw(wxBufferedDC* dc, double Sx, double Sy) {
-	double rotateRadians = -_rotateAngle * M_PI / 180.0;
-     dc->SetPen(_color);
+	double rotateRadians = -m_rotateAngle * M_PI / 180.0;
+	dc->SetPen(m_color);
 	dc->SetBrush(*wxTRANSPARENT_BRUSH);
 
-	
 
 
-	std::vector<Point> vertices = { _startPoint, _endPoint};
+
+	std::vector<Point> vertices = { m_startPoint, m_endPoint };
 
 	for (auto&& vertice : vertices)
 	{
-		vertice.transformPoint(_transformX, _transformY);
-		vertice.transformPoint(-_rotateX, -_rotateY);
+		vertice.transformPoint(m_transformX, m_transformY);
+		vertice.transformPoint(-m_rotateX, -m_rotateY);
 		vertice.rotatePoint(rotateRadians);
-		vertice.transformPoint(_rotateX, _rotateY);
+		vertice.transformPoint(m_rotateX, m_rotateY);
 
 		//_startPoint.transformPoint(-x0, -y0);//tu jest problem
 		vertice.transformPoint(0, 0);//tu jest problem

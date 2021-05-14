@@ -2,7 +2,7 @@
 #include<cmath>
 class Point {
 public:
-	Point();
+	Point() = default;
 	Point(double x, double y);
 	void setX(double x);
 	void setY(double y);
@@ -19,7 +19,7 @@ public:
 	void scalePoint(double dx, double dy);
 
 private:
-	double _x;
-	double _y;
+	double m_x;
+	double m_y;
 
 };

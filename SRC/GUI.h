@@ -40,9 +40,9 @@ class GUI : public wxFrame
 		wxStaticText* m_cursorPosition;
 		
 		// Virtual event handlers, overide them in your derived class
-		virtual void m_workspaceOnMotion( wxMouseEvent& event ) { event.Skip(); }
-		virtual void m_workspaceOnUpdateUI( wxUpdateUIEvent& event ) { event.Skip(); }
-		virtual void m_consoleOnTextEnter( wxCommandEvent& event ) { event.Skip(); }
+		virtual void workspaceOnMotion( wxMouseEvent& event ) { event.Skip(); }
+		virtual void workspaceOnUpdateUI( wxUpdateUIEvent& event ) { event.Skip(); }
+		virtual void consoleOnTextEnter( wxCommandEvent& event ) { event.Skip(); }
 		
 	
 	public:

@@ -1,43 +1,38 @@
 #include"Point.h"
 
-Point::Point(){}
-
-Point::Point(double x, double y) : _x(x), _y(y) {
-
-}
+Point::Point(double x, double y) : m_x(x), m_y(y) {}
 
 void Point::setX(double x) {
-	_x = x;
+	m_x = x;
 }
 
 void Point::setY(double y) {
-	_y = y;
+	m_y = y;
 }
 
 double Point::getX() const {
-	return _x;
+	return m_x;
 }
 
 double Point::getY() const {
-	return _y;
+	return m_y;
 }
 
 void Point::rotatePoint(double alfa) {
-	double tempX = _x;
-	double tempY = _y;
+	double tempX = m_x;
+	double tempY = m_y;
 
-	_x = tempX * cos(alfa) - tempY * sin(alfa);
-	_y = tempY * cos(alfa) + tempX * sin(alfa);
+	m_x = tempX * cos(alfa) - tempY * sin(alfa);
+	m_y = tempY * cos(alfa) + tempX * sin(alfa);
 }
 
 void Point::transformPoint(double dx, double dy) {
-	_x += dx;;
-	_y += dy;
+	m_x += dx;;
+	m_y += dy;
 }
 
 void Point::scalePoint(double dx, double dy) {
-	_x *= dx;
-	_y *= dy;
+	m_x *= dx;
+	m_y *= dy;
 }
-
 

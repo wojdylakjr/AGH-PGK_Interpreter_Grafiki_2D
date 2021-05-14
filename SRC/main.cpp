@@ -1,7 +1,8 @@
-﻿#include <wx/wx.h>
+#include <wx/wx.h>
+
 #include "VectorGraphicsInterpreterGUI.h"
 
-class MyApp : public wxApp {
+class VectorGraphicsInterpreterApp : public wxApp {
 
 public:
 
@@ -10,9 +11,9 @@ public:
 
 };
 
-IMPLEMENT_APP(MyApp);
+IMPLEMENT_APP(VectorGraphicsInterpreterApp);
 
-bool MyApp::OnInit()
+bool VectorGraphicsInterpreterApp::OnInit()
 {
 	wxFrame* mainFrame = new VectorGraphicsInterpreterGUI(NULL);
 	mainFrame->Show(true);

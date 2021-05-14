@@ -1,47 +1,40 @@
-﻿#include "VectorGraphicsInterpreterGUI.h"
+#include "VectorGraphicsInterpreterGUI.h"
 
-VectorGraphicsInterpreterGUI::VectorGraphicsInterpreterGUI(wxWindow* parent)
-	:
-	GUI(parent)
+VectorGraphicsInterpreterGUI::VectorGraphicsInterpreterGUI( wxWindow* parent )
+:
+GUI( parent )
 {
 
 }
 
-void VectorGraphicsInterpreterGUI::m_workspaceOnMotion(wxMouseEvent& event)
+void VectorGraphicsInterpreterGUI::workspaceOnMotion( wxMouseEvent& event )
 {
 	long x, y;
 	event.GetPosition(&x, &y);
 	m_currentX = (double)x;
 	m_currentY = (double)y;
 	m_cursorPosition->SetLabel("   x = " + std::to_string(m_currentX) + "\n   y = " + std::to_string(m_currentY));
-
-
 }
 
-void VectorGraphicsInterpreterGUI::m_workspaceOnUpdateUI(wxUpdateUIEvent& event)
+void VectorGraphicsInterpreterGUI::workspaceOnUpdateUI( wxUpdateUIEvent& event )
 {
 	Repaint();
 }
 
-void VectorGraphicsInterpreterGUI::m_consoleOnTextEnter(wxCommandEvent& event)
+void VectorGraphicsInterpreterGUI::consoleOnTextEnter( wxCommandEvent& event )
 {
-
 	Repaint();
 
 	std::string input = static_cast<std::string>(m_console->GetValue());
 	std::string delimeter = " ";
 	std::string command = input.substr(0, input.find(delimeter));
-	//input.erase(0, input.find(delimeter) + delimeter.length());
-	
+	input.erase(0, input.find(delimeter) + delimeter.length());
 
 	auto it = std::find(m_commands.begin(), m_commands.end(), command);
 	int commandID = -1;
 	if (it != m_commands.end()) {
 		commandID = it - m_commands.begin();
 	}
-
-	m_testCommand = std::to_string(commandID) + ": " + input;
-
 
 
 	switch (commandID) {
@@ -97,7 +90,6 @@ void VectorGraphicsInterpreterGUI::m_consoleOnTextEnter(wxCommandEvent& event)
 		break;
 	}
 	Repaint();
-
 }
 
 
@@ -138,50 +130,40 @@ void VectorGraphicsInterpreterGUI::Repaint()
 	clientDc.GetSize(&width, &height);
 	m_picture = wxBitmap(width, height);
 	wxBufferedDC dc(&clientDc, m_picture);
-	width /= 2;
-	height /= 2;
+
+	dc.Clear();
+	dc.SetBackground(wxColor(255, 255, 255));
+	dc.SetBrush(wxBrush(wxColor(0, 0, 0)));
+	dc.SetBackgroundMode(wxTRANSPARENT);
+	dc.SetTextForeground(*wxBLACK);
 
 	int w = 0;
 	int h = 0;
 	m_workspace->GetSize(&w, &h);
 
-	dc.Clear();
-	dc.SetBackground(wxColor(255, 255, 255));
-	dc.SetBrush(wxBrush(wxColor(0, 1, 255)));
-
-
-
-	dc.DrawCircle(width, height - 80, 50);
-	
-
-	wxFont font(12, wxFONTFAMILY_SWISS, wxNORMAL, wxBOLD);
-	dc.SetFont(font);
-	dc.SetBackgroundMode(wxTRANSPARENT);
-	dc.SetTextForeground(*wxBLACK);
-	dc.DrawText(m_testCommand, 100,100);
-
 	//wypisujemy rozmiar wektora _shapes, zwieksza sie ilosc po kazdym wywolaniu komendy line
-	std::string s1 = std::to_string(_shapes.size());
+	std::string s1 = std::to_string(m_shapes.size());
 	dc.DrawText(s1, 300, 200);
 	std::string s2 = std::to_string(w);
 	dc.DrawText(s2, 300, 300);
 
 
-	int Sx = (double)w / (_drawPanel.getRightUpPoint().getX() - _drawPanel.getLeftDownPoint().getX());
-	int Sy = (double)h / (_drawPanel.getRightUpPoint().getY() - _drawPanel.getLeftDownPoint().getY());
+	int Sx = (double)w / (m_drawPanel.getRightUpPoint().getX() - m_drawPanel.getLeftDownPoint().getX());
+	int Sy = (double)h / (m_drawPanel.getRightUpPoint().getY() - m_drawPanel.getLeftDownPoint().getY());
 
 	//rysujemy po kolei kazdy obiekt
-	for (Shape* shape : _shapes) {
+	for (Shape* shape : m_shapes) {
 		shape->draw(&dc, Sx, Sy);
 	}
-}
-
-void VectorGraphicsInterpreterGUI::commandBackground(std::string instructions)
-{
 
 }
 
 void VectorGraphicsInterpreterGUI::commandClear(std::string instructions)
+{
+
+}
+
+void VectorGraphicsInterpreterGUI::commandBackground(std::string instructions)
 {
 
 }
@@ -214,17 +196,17 @@ void VectorGraphicsInterpreterGUI::commandCircle(std::string instructions)
 void VectorGraphicsInterpreterGUI::commandLine(std::string instructions)
 {
 
-	Shape* firstLine = new Line (300, 100, 400, 500, wxColor(0, 64, 255));
-	_shapes.push_back(firstLine);
-
-}
-
-void VectorGraphicsInterpreterGUI::commandFill(std::string instructions)
-{
+	Shape* firstLine = new Line(300, 100, 400, 500, wxColor(0, 64, 255));
+	m_shapes.push_back(firstLine);
 
 }
 
 void VectorGraphicsInterpreterGUI::commandArc(std::string instructions)
+{
+
+}
+
+void VectorGraphicsInterpreterGUI::commandFill(std::string instructions)
 {
 
 }

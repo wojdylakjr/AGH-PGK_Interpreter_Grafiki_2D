@@ -12,10 +12,9 @@ public:
 
 
 private:
-	Point _leftDownPoint;
-	Point _rightUpPoint;
+	Point m_leftDownPoint;
+	Point m_rightUpPoint;
 
-	
+
 
 };
-
