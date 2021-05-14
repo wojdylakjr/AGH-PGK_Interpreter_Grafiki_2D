@@ -179,7 +179,7 @@
                                         <event name="OnMiddleDClick"></event>
                                         <event name="OnMiddleDown"></event>
                                         <event name="OnMiddleUp"></event>
-                                        <event name="OnMotion">m_workspaceOnMotion</event>
+                                        <event name="OnMotion">workspaceOnMotion</event>
                                         <event name="OnMouseEvents"></event>
                                         <event name="OnMouseWheel"></event>
                                         <event name="OnPaint"></event>
@@ -188,7 +188,7 @@
                                         <event name="OnRightUp"></event>
                                         <event name="OnSetFocus"></event>
                                         <event name="OnSize"></event>
-                                        <event name="OnUpdateUI">m_workspaceOnUpdateUI</event>
+                                        <event name="OnUpdateUI">workspaceOnUpdateUI</event>
                                     </object>
                                 </object>
                             </object>
@@ -287,7 +287,7 @@
                                         <event name="OnSetFocus"></event>
                                         <event name="OnSize"></event>
                                         <event name="OnText"></event>
-                                        <event name="OnTextEnter">m_consoleOnTextEnter</event>
+                                        <event name="OnTextEnter">consoleOnTextEnter</event>
                                         <event name="OnTextMaxLen"></event>
                                         <event name="OnTextURL"></event>
                                         <event name="OnUpdateUI"></event>
