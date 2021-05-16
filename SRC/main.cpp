@@ -1,6 +1,6 @@
 #include <wx/wx.h>
 
-#include "VectorGraphicsInterpreterGUI.h"
+#include "GUI/VectorGraphicsInterpreterGUI.h"
 
 class VectorGraphicsInterpreterApp : public wxApp {
 

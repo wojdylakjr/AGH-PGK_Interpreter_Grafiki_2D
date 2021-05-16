@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="SRC">
+      <UniqueIdentifier>{6a1344c5-556e-4a50-a98f-f57e3c799546}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SRC\CommandValidator">
+      <UniqueIdentifier>{9af0dbe4-665a-49f5-a790-7afe126ab9f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SRC\Panel">
+      <UniqueIdentifier>{3aacfa2f-834f-42fe-a4ed-1b11dedba0a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SRC\GUI">
+      <UniqueIdentifier>{1e905343-5e1f-4995-955b-7653289a9ebe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SRC\Shapes">
+      <UniqueIdentifier>{96e25a07-ab87-4100-86e3-88ad547eaf20}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="CommandValidator\CommandValidator.h">
+      <Filter>SRC\CommandValidator</Filter>
+    </ClInclude>
+    <ClInclude Include="CommandValidator\StringSplit.h">
+      <Filter>SRC\CommandValidator</Filter>
+    </ClInclude>
+    <ClInclude Include="Panel\Panel.h">
+      <Filter>SRC\Panel</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI\GUI.h">
+      <Filter>SRC\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI\VectorGraphicsInterpreterGUI.h">
+      <Filter>SRC\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Shapes\Line.h">
+      <Filter>SRC\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="Shapes\Point.h">
+      <Filter>SRC\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="Shapes\Shape.h">
+      <Filter>SRC\Shapes</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>SRC</Filter>
+    </ClCompile>
+    <ClCompile Include="CommandValidator\CommandValidator.cpp">
+      <Filter>SRC\CommandValidator</Filter>
+    </ClCompile>
+    <ClCompile Include="Panel\Panel.cpp">
+      <Filter>SRC\Panel</Filter>
+    </ClCompile>
+    <ClCompile Include="GUI\GUI.cpp">
+      <Filter>SRC\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="GUI\VectorGraphicsInterpreterGUI.cpp">
+      <Filter>SRC\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Shapes\Line.cpp">
+      <Filter>SRC\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="Shapes\Point.cpp">
+      <Filter>SRC\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="Shapes\Shape.cpp">
+      <Filter>SRC\Shapes</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
