@@ -16,6 +16,9 @@
     <Filter Include="SRC\Shapes">
       <UniqueIdentifier>{96e25a07-ab87-4100-86e3-88ad547eaf20}</UniqueIdentifier>
     </Filter>
+    <Filter Include="SRC\Dialogs">
+      <UniqueIdentifier>{54a1997e-3804-4dde-a524-3d673c255ab5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CommandValidator\CommandValidator.h">
@@ -42,6 +45,21 @@
     <ClInclude Include="Shapes\Shape.h">
       <Filter>SRC\Shapes</Filter>
     </ClInclude>
+    <ClInclude Include="Shapes\Rectangle.h">
+      <Filter>SRC\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="Shapes\Circle.h">
+      <Filter>SRC\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="Shapes\Ellipse.h">
+      <Filter>SRC\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="Shapes\Arc.h">
+      <Filter>SRC\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="Dialogs\VectorGraphicsInterpreterLineDialog.h">
+      <Filter>SRC\GUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -67,6 +85,21 @@
     </ClCompile>
     <ClCompile Include="Shapes\Shape.cpp">
       <Filter>SRC\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="Shapes\Rectangle.cpp">
+      <Filter>SRC\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="Shapes\Circle.cpp">
+      <Filter>SRC\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="Shapes\Ellipse.cpp">
+      <Filter>SRC\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="Shapes\Arc.cpp">
+      <Filter>SRC\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialogs\VectorGraphicsInterpreterLineDialog.cpp">
+      <Filter>SRC\Dialogs</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -1,13 +1,14 @@
 #include "CommandValidator.h"
 #include "StringSplit.h"
 
+
 bool CommandValidator::validateCommandRange(const std::vector<std::string>& instructions) {
-	
+
 	if (!checkNumberOfArguments(instructions, 4u)) {
 		return false;
 	}
 
-	if(!convertToInt(instructions, 4u)) {
+	if (!convertToInt(instructions, 4u)) {
 		return false;
 	}
 
@@ -15,13 +16,11 @@ bool CommandValidator::validateCommandRange(const std::vector<std::string>& inst
 		return false;
 	}
 
-	setCorners(m_values[0], m_values[1], m_values[2], m_values[3]);
-
-	return true;	
+	return true;
 }
 
 bool CommandValidator::validateCommandBackground(const std::vector<std::string>& instructions) {
-	
+
 	if (!checkNumberOfArguments(instructions, 1u)) {
 		return false;
 	}
@@ -37,9 +36,9 @@ bool CommandValidator::validateCommandLine(const std::vector<std::string>& instr
 
 	if (!checkNumberOfArguments(instructions, 4u, 5u)) {
 		return false;
-	}	
+	}
 
-	if(!convertToInt(instructions, 4u)) {
+	if (!convertToInt(instructions, 4u)) {
 		return false;
 	}
 
@@ -48,10 +47,11 @@ bool CommandValidator::validateCommandLine(const std::vector<std::string>& instr
 	}
 
 	if (instructions.size() - 1 == 5u) {
-		if (!convertToColour(instructions[1])) {
+		if (!convertToColour(instructions[5])) {
 			return false;
 		}
-	} else {
+	}
+	else {
 		m_colour = 0;
 	}
 
@@ -60,12 +60,12 @@ bool CommandValidator::validateCommandLine(const std::vector<std::string>& instr
 }
 
 bool CommandValidator::validateCommandRectangle(const std::vector<std::string>& instructions) {
-	
+
 	if (!checkNumberOfArguments(instructions, 4u, 5u)) {
 		return false;
-	}	
+	}
 
-	if(!convertToInt(instructions, 4u)) {
+	if (!convertToInt(instructions, 4u)) {
 		return false;
 	}
 
@@ -74,65 +74,234 @@ bool CommandValidator::validateCommandRectangle(const std::vector<std::string>& 
 	}
 
 	if (instructions.size() - 1 == 5u) {
-		if (!convertToColour(instructions[1])) {
+		if (!convertToColour(instructions[5])) {
 			return false;
 		}
-	} else {
+	}
+	else {
 		m_colour = 0;
 	}
 
 	if (!checkArgumentDependencies()) {
 		return false;
-	} 
+	}
 
 	return true;
 }
 
 bool CommandValidator::validateCommandCircle(const std::vector<std::string>& instructions) {
+
+	if (!checkNumberOfArguments(instructions, 3u, 4u)) {
+		return false;
+	}
+
+	if (!convertToInt(instructions, 3u)) {
+		return false;
+	}
+
+	if (instructions.size() - 1 == 4u) {
+		if (!convertToColour(instructions[4])) {
+			return false;
+		}
+	}
+	else {
+		m_colour = 0;
+	}
+
+	if (m_values[2] < 0) {
+		m_helpMessage = "\nRadius must >= 0!";
+	}
+
+	if (!checkIfPointExists(m_values[0] + m_values[2], m_values[1] + m_values[2]) || !checkIfPointExists(m_values[0] + m_values[2], m_values[1] - m_values[2])
+		|| !checkIfPointExists(m_values[0] - m_values[2], m_values[1] + m_values[2]) || !checkIfPointExists(m_values[0] - m_values[2], m_values[1] - m_values[2])) {
+		return false;
+	}
+
 	return true;
 }
 
 bool CommandValidator::validateCommandEllipse(const std::vector<std::string>& instructions) {
+
+	if (!checkNumberOfArguments(instructions, 4u, 5u)) {
+		return false;
+	}
+
+	if (!convertToInt(instructions, 4u)) {
+		return false;
+	}
+
+	if (instructions.size() - 1 == 5u) {
+		if (!convertToColour(instructions[5])) {
+			return false;
+		}
+	}
+	else {
+		m_colour = 0;
+	}
+
+	if (m_values[2] < 0 || m_values[3] < 0) {
+		m_helpMessage = "\nHalf shaft must >= 0!";
+	}
+
+	if (!checkIfPointExists(m_values[0] + m_values[2], m_values[1] + m_values[3]) || !checkIfPointExists(m_values[0] + m_values[2], m_values[1] - m_values[3])
+		|| !checkIfPointExists(m_values[0] - m_values[2], m_values[1] + m_values[3]) || !checkIfPointExists(m_values[0] - m_values[2], m_values[1] - m_values[3])) {
+		return false;
+	}
+
 	return true;
 }
 
 bool CommandValidator::validateCommandArc(const std::vector<std::string>& instructions) {
+
+	if (!checkNumberOfArguments(instructions, 6u, 7u)) {
+		return false;
+	}
+
+	if (!convertToInt(instructions, 6u)) {
+		return false;
+	}
+
+	if (instructions.size() - 1 == 7u) {
+		if (!convertToColour(instructions[7])) {
+			return false;
+		}
+	}
+	else {
+		m_colour = 0;
+	}
+
+	if (m_values[2] < 0 || m_values[3] < 0) {
+		m_helpMessage = "\nHalf shaft must >= 0!";
+	}
+
+	if (!checkIfPointExists(m_values[0] + m_values[2], m_values[1] + m_values[3]) || !checkIfPointExists(m_values[0] + m_values[2], m_values[1] - m_values[3])
+		|| !checkIfPointExists(m_values[0] - m_values[2], m_values[1] + m_values[3]) || !checkIfPointExists(m_values[0] - m_values[2], m_values[1] - m_values[3])) {
+		return false;
+	}
+
 	return true;
 }
 
 bool CommandValidator::validateCommandFill(const std::vector<std::string>& instructions) {
+	
+	if (!checkNumberOfArguments(instructions, 2u)) {
+		return false;
+	}
+
+	if (instructions[1] != "all" && !convertToInt(instructions, 1u)) {
+		return false;
+	}
+
+	if (instructions[1] == "all") {
+		m_all = true;
+	}
+
+	if (!convertToColour(instructions[2])) {
+		return false;
+	}
+
 	return true;
 }
 
 bool CommandValidator::validateCommandDelete(const std::vector<std::string>& instructions) {
+	
+	if (!checkNumberOfArguments(instructions, 1u)) {
+		return false;
+	}
+
+	if (instructions[1] != "all" && !convertToInt(instructions, 1u)) {
+		return false;
+	}
+
+	if (instructions[1] == "all") {
+		m_all = true;
+	}
+
 	return true;
 }
 
 bool CommandValidator::validateCommandMove(const std::vector<std::string>& instructions) {
+
+	if (!checkNumberOfArguments(instructions, 3u)) {
+		return false;
+	}
+
+	if (instructions[1] == "all") {
+		if (!convertToInt(instructions, 3u, 2u)) {
+			return false;
+		}
+		m_all = true;
+	}
+	else if (!convertToInt(instructions, 3u)) {
+		return false;
+	}
+		
+
 	return true;
 }
 
 bool CommandValidator::validateCommandRotate(const std::vector<std::string>& instructions) {
+
+	if (!checkNumberOfArguments(instructions, 4u)) {
+		return false;
+	}
+
+
+	if (instructions[1] == "all") {
+		if (!convertToInt(instructions, 4u, 2u)) {
+			return false;
+		}
+		m_all = true;
+	}
+	else if (!convertToInt(instructions, 4u)) {
+		return false;
+	}
+
 	return true;
 }
 
 bool CommandValidator::validateCommandShow(const std::vector<std::string>& instructions) {
+
+	if (!checkNumberOfArguments(instructions, 1u)) {
+		return false;
+	}
+
+	if (instructions[1] != "all" && !convertToInt(instructions, 1u)) {
+		return false;
+	}
+
+	if (instructions[1] == "all") {
+		m_all = true;
+	}
+
 	return true;
 }
 
 bool CommandValidator::validateCommandClear(const std::vector<std::string>& instructions) {
+	
+	if (!checkNumberOfArguments(instructions, 0u)) {
+		return false;
+	}
+
 	return true;
 }
 
 bool CommandValidator::validateCommandWrite(const std::vector<std::string>& instructions) {
+
 	return true;
-}	
+}
 
 bool CommandValidator::validateCommandRead(const std::vector<std::string>& instructions) {
 	return true;
 }
 
 bool CommandValidator::validateCommandSave(const std::vector<std::string>& instructions) {
+	if (!checkNumberOfArguments(instructions, 2u)) {
+		return false;
+	}
+	if (!convertToInt(instructions, 2u)) {
+		return false;
+	}
 	return true;
 }
 
@@ -149,13 +318,14 @@ bool CommandValidator::checkNumberOfArguments(const std::vector<std::string>& in
 	if (expectedNumber2 == 0) {
 		if (instructions.size() - 1 != expectedNumber1) {
 			m_helpMessage = "\nWrong number of arguments! Expected: " + std::to_string(expectedNumber1)
-			+ ", given: " + std::to_string(instructions.size() - 1) + "";
+				+ ", given: " + std::to_string(instructions.size() - 1) + "";
 			return false;
 		}
-	} else {
+	}
+	else {
 		if (instructions.size() - 1 != expectedNumber1 && instructions.size() - 1 != expectedNumber2) {
 			m_helpMessage = "\nWrong number of arguments! Expected: " + std::to_string(expectedNumber1)
-			+ " or " + std::to_string(expectedNumber2) + ", given: " + std::to_string(instructions.size() - 1) + "";
+				+ " or " + std::to_string(expectedNumber2) + ", given: " + std::to_string(instructions.size() - 1) + "";
 			return false;
 		}
 	}
@@ -170,30 +340,43 @@ bool CommandValidator::checkArgumentDependencies() {
 	return true;
 }
 
-bool CommandValidator::convertToInt(const std::vector<std::string>& instructions, unsigned argumentsNumber) {
+bool CommandValidator::convertToInt(const std::vector<std::string>& instructions, unsigned argumentsNumber, unsigned start) {
 	m_values.clear();
-	for (unsigned i = 1; i <= argumentsNumber; i++) {
+	for (unsigned i = start; i <= argumentsNumber; i++) {
 		try {
-	        m_values.push_back(std::stoi(instructions[i]));
-	    } catch (const std::invalid_argument&) {
-	        m_helpMessage = "\nArgument at index " + std::to_string(i) + " is invalid! Expected int type";
-	        return false;
-	    }
+			m_values.push_back(std::stoi(instructions[i]));
+		}
+		catch (const std::invalid_argument&) {
+			m_helpMessage = "\nArgument at index " + std::to_string(i) + " is invalid! Expected int type";
+			return false;
+		}
 	}
 	return true;
-}	
+}
 
 bool CommandValidator::convertToColour(const std::string& colour) {
 
-	if(!regex_match(colour, m_pattern)) {
+	if (!regex_match(colour, m_pattern)) {
 		m_helpMessage = "\nColour doesn`t match hexadecimal colour pattern! Valid example: \"#000000\"";
-    	return false;
-  	}
+		return false;
+	}
 
-  	std::string c = colour.substr(1, colour.size() - 1);
-	std::istringstream converter(c);
-    converter >> std::hex >> m_colour;
-    return true;
+	unsigned long r, g, b;
+
+	std::string red = colour.substr(1, 2);
+	std::string green = colour.substr(3, 2);
+	std::string blue = colour.substr(5, 2);
+
+	std::istringstream isR(red);
+	isR >> std::hex >> r;
+	std::istringstream isG(green);
+	isG >> std::hex >> g;
+	std::istringstream isB(blue);
+	isB >> std::hex >> b;
+
+	m_colour = b << 16 | g << 8 | r;
+
+	return true;
 }
 
 bool CommandValidator::checkIfPointExists(int x, int y) {
@@ -201,10 +384,10 @@ bool CommandValidator::checkIfPointExists(int x, int y) {
 		&& y >= m_bottomLeftCornerY && y <= m_upRightCornerY) {
 		return true;
 	}
-	m_helpMessage = "\nPoint (" + std::to_string(x) + ", " + std::to_string(y) + 
-					") outside of panel, current Panel corners: (" + std::to_string(m_bottomLeftCornerX) + 
-					", " + std::to_string(m_bottomLeftCornerY) + "), (" +
-					std::to_string(m_upRightCornerX) +	", " + std::to_string(m_upRightCornerY) + ")";
+	m_helpMessage = "\nPoint (" + std::to_string(x) + ", " + std::to_string(y) +
+		") outside of panel, current Panel corners: (" + std::to_string(m_bottomLeftCornerX) +
+		", " + std::to_string(m_bottomLeftCornerY) + "), (" +
+		std::to_string(m_upRightCornerX) + ", " + std::to_string(m_upRightCornerY) + ")";
 	return false;
 }
 
@@ -286,9 +469,18 @@ unsigned long CommandValidator::getColour() const {
 	return m_colour;
 }
 
-void CommandValidator::setCorners(int x1, int y1, int x2, int y2) {
-	m_bottomLeftCornerX = x1;
-	m_bottomLeftCornerY = y1;
-	m_upRightCornerX = x2;
-	m_upRightCornerY = y2;
+void CommandValidator::setCorners(const Panel& panel) {
+	m_bottomLeftCornerX = panel.getLeftDownPoint().getX();
+	m_bottomLeftCornerY = panel.getLeftDownPoint().getY();
+	m_upRightCornerX = panel.getRightUpPoint().getX();
+	m_upRightCornerY = panel.getRightUpPoint().getY();
+}
+
+bool CommandValidator::getAll() {
+	if (m_all) {
+		m_all = false;
+		return true;
+	} else {
+		return false;
+	}
 }
