@@ -1,6 +1,6 @@
 #include "Line.h"
 
-#include <vector>
+
 
 ShapeLine::ShapeLine(double x1, double y1, double x2, double y2, wxColor color) : Shape(color) {
 	m_startPoint.setX(x1);
@@ -18,7 +18,7 @@ void ShapeLine::draw(wxBufferedDC* dc, double w, double h, Panel panel) {
 
 
 
-	std::vector<Point> vertices = { m_startPoint, m_endPoint };
+	vertices = { m_startPoint, m_endPoint };
 
 	for (auto&& vertice : vertices)
 	{
@@ -58,7 +58,7 @@ Point ShapeLine::getPoint(bool start)
 {
 	if (start) {
 		return m_startPoint;
-	} 
+	}
 	else {
 		return m_endPoint;
 	}
@@ -82,13 +82,13 @@ std::string ShapeLine::getTypeName() {
 
 std::string ShapeLine::getParameters() {
 	std::string temp = "line ";
-	temp += std::to_string((int)m_startPoint.getX());
+	temp += std::to_string((int)vertices[0].getX());
 	temp += " ";
-	temp += std::to_string((int)m_startPoint.getY());
+	temp += std::to_string((int)(vertices[0].getY()));
 	temp += " ";
-	temp += std::to_string((int)m_endPoint.getX());
+	temp += std::to_string((int)vertices[1].getX());
 	temp += " ";
-	temp += std::to_string((int)m_endPoint.getY());
+	temp += std::to_string((int)(vertices[1].getY()));
 	temp += " ";
 	temp += m_color.GetAsString(wxC2S_HTML_SYNTAX);
 	return temp;

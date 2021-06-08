@@ -57,8 +57,23 @@
     <ClInclude Include="Shapes\Arc.h">
       <Filter>SRC\Shapes</Filter>
     </ClInclude>
+    <ClInclude Include="Dialogs\DialogValidator.h">
+      <Filter>SRC\Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="Dialogs\VectorGraphicsInterpreterArcDialog.h">
+      <Filter>SRC\Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="Dialogs\VectorGraphicsInterpreterCircleDialog.h">
+      <Filter>SRC\Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="Dialogs\VectorGraphicsInterpreterEllipseDialog.h">
+      <Filter>SRC\Dialogs</Filter>
+    </ClInclude>
     <ClInclude Include="Dialogs\VectorGraphicsInterpreterLineDialog.h">
-      <Filter>SRC\GUI</Filter>
+      <Filter>SRC\Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="Dialogs\VectorGraphicsInterpreterRectangleDialog.h">
+      <Filter>SRC\Dialogs</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -98,7 +113,22 @@
     <ClCompile Include="Shapes\Arc.cpp">
       <Filter>SRC\Shapes</Filter>
     </ClCompile>
+    <ClCompile Include="Dialogs\DialogValidator.cpp">
+      <Filter>SRC\Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialogs\VectorGraphicsInterpreterArcDialog.cpp">
+      <Filter>SRC\Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialogs\VectorGraphicsInterpreterCircleDialog.cpp">
+      <Filter>SRC\Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialogs\VectorGraphicsInterpreterEllipseDialog.cpp">
+      <Filter>SRC\Dialogs</Filter>
+    </ClCompile>
     <ClCompile Include="Dialogs\VectorGraphicsInterpreterLineDialog.cpp">
+      <Filter>SRC\Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialogs\VectorGraphicsInterpreterRectangleDialog.cpp">
       <Filter>SRC\Dialogs</Filter>
     </ClCompile>
   </ItemGroup>

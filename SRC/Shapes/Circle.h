@@ -16,5 +16,7 @@ public:
 private:
 	Point m_centerOfCircle;
 	double m_radius;
+	Point center;
+	double R;
 
 };

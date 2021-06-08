@@ -35,7 +35,7 @@ void VectorGraphicsInterpreterGUI::workspaceOnMotion(wxMouseEvent& event)
 
 	//X = floor(100 * X) / 100;
 	//Y = floor(100 * Y) / 100;
-	m_cursorPosition->SetLabel("   x = " + std::to_string(X) + "\n   y = " + std::to_string(Y));
+	m_cursorPosition->SetLabel("    x = " + std::to_string((int)X) + "\n    y = " + std::to_string((int)Y));
 }
 
 void VectorGraphicsInterpreterGUI::workspaceOnUpdateUI( wxUpdateUIEvent& event )
@@ -122,36 +122,77 @@ void VectorGraphicsInterpreterGUI::m_objectsListOnListBox(wxCommandEvent& event)
 
 void VectorGraphicsInterpreterGUI::OnRightDown(wxMouseEvent& event)
 {
+	if (m_objectsList->GetSelection() == wxNOT_FOUND) {
+		return;
+	}
 	std::string selection = m_objectsList->GetString(m_objectsList->GetSelection());
 	int id = std::stoi(selection.substr(19, 4));
+	int index = 0;
 	Shape* selectedShape = nullptr;
 	for (auto* shape : m_shapes)
 	{
+
 		if (shape->getId() == id)
 		{
 			selectedShape = shape;
 			break;
 		}
+		index++;
 	}
-	
+
 	switch (selectedShape->hashName()) {
 	case line: {
-		VectorGraphicsInterpreterLineDialog dialog(this, static_cast<ShapeLine*>(selectedShape));
-		if (dialog.ShowModal() == wxID_CANCEL)
-			return;
+		VectorGraphicsInterpreterLineDialog dialog(this, dynamic_cast<ShapeLine*>(selectedShape));
+		if (dialog.ShowModal() == 101) {
+			delete selectedShape;
+			m_shapes.erase(m_shapes.begin() + index);
+			m_objectsList->Delete(index);
+		}
 		break;
 	}
-	case rectangle:
+	case rectangle: {
+		VectorGraphicsInterpreterRectangleDialog dialog(this, dynamic_cast<ShapeRectangle*>(selectedShape));
+		if (dialog.ShowModal() == 101) {
+			delete selectedShape;
+			m_shapes.erase(m_shapes.begin() + index);
+			m_objectsList->Delete(index);
+		}
 		break;
-	case circle:
+	}
+	case circle: {
+		VectorGraphicsInterpreterCircleDialog dialog(this, dynamic_cast<ShapeCircle*>(selectedShape));
+		if (dialog.ShowModal() == 101) {
+			delete selectedShape;
+			m_shapes.erase(m_shapes.begin() + index);
+			m_objectsList->Delete(index);
+		}
 		break;
-	case ellipse:
+	}
+	case ellipse: {
+		VectorGraphicsInterpreterEllipseDialog dialog(this, dynamic_cast<ShapeEllipse*>(selectedShape));
+		if (dialog.ShowModal() == 101) {
+			delete selectedShape;
+			m_shapes.erase(m_shapes.begin() + index);
+			m_objectsList->Delete(index);
+		}
 		break;
-	case arc:
+	}
 		break;
+	case arc: {
+		VectorGraphicsInterpreterArcDialog dialog(this, dynamic_cast<ShapeArc*>(selectedShape));
+		if (dialog.ShowModal() == 101) {
+			delete selectedShape;
+			m_shapes.erase(m_shapes.begin() + index);
+			m_objectsList->Delete(index);
+		}
+		break;
+	}
 	default:
 		break;
 	}
+
+
+	Repaint();
 
 }
 
@@ -250,9 +291,10 @@ void VectorGraphicsInterpreterGUI::Repaint()
 	wxCoord width, height;
 	wxClientDC clientDc(m_workspace);
 	clientDc.GetSize(&width, &height);
-	//m_picture = wxBitmap(width, height);
-	
+	m_picture = wxBitmap(width, height);
+	//
 	wxBufferedDC dc(&clientDc, m_picture);
+
 	m_picture = dc.GetSelectedBitmap();
 
 	
@@ -463,7 +505,7 @@ void VectorGraphicsInterpreterGUI::show(int id)
 
 void VectorGraphicsInterpreterGUI::commandWrite()
 {
-	wxFileDialog dialog(this, _("Save file"), "", "", "", wxFD_SAVE | wxFD_OVERWRITE_PROMPT);
+	wxFileDialog dialog(this, _("Save data"), "", "", "xyz files (*.)|*.xyz", wxFD_SAVE | wxFD_OVERWRITE_PROMPT);
 
 	if (dialog.ShowModal() == wxID_OK)
 	{
@@ -487,27 +529,20 @@ void VectorGraphicsInterpreterGUI::commandWrite()
 void VectorGraphicsInterpreterGUI::commandRead()
 {
 	wxString        file;
-	wxFileDialog    fdlog(this);
-
-	// show file dialog and get the path to
-	// the file that was selected.
+	wxFileDialog fdlog(this, _("Read data"), "", "", "xyz files (*.)|*.xyz");
 	if (fdlog.ShowModal() != wxID_OK) return;
 	file.Clear();
 	file = fdlog.GetPath();
 
 	wxString str;
-
-	// open the file
 	wxTextFile tfile;
 	tfile.Open(file);
-	
-	// read all lines one by one
-	// until the end of the file
+
 	m_console->AppendText(static_cast<wxString>("\n"));
 	str = tfile.GetFirstLine();
 	while (!tfile.Eof())
 	{
-		//m_console->AppendText(str);
+
 		if (!m_commandValidator.validate(static_cast<std::string>(str))) {
 			m_console->AppendText(static_cast<wxString>(m_commandValidator.getHelpMessage()));
 		}
@@ -536,10 +571,8 @@ void VectorGraphicsInterpreterGUI::commandRead()
 			}
 			
 		}
-		//m_console->AppendText(static_cast<wxString>("\n"));
 		
 		str = tfile.GetNextLine();
-		//processLine(str); // placeholder, do whatever you want with the string
 	}
 	Repaint();
 
@@ -562,9 +595,10 @@ void VectorGraphicsInterpreterGUI::commandSave()
 
 		int w, h;
 		wxImage screenBufferImg = m_picture.ConvertToImage();
-		screenBufferImg = screenBufferImg.Rescale(m_bitMapWidth, m_bitMapHeight);
+		//screenBufferImg = screenBufferImg.Rescale(m_bitMapWidth, m_bitMapHeight);
 
-		//m_picture.SaveFile(path, wxBITMAP_TYPE_BMP);
+		m_picture.SaveFile(path, wxBITMAP_TYPE_BMP);
 		screenBufferImg.SaveFile(path, wxBITMAP_TYPE_BMP);
 	}
+	
 }

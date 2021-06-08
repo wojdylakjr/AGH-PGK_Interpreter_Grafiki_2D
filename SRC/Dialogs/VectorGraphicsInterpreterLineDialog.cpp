@@ -22,30 +22,56 @@ LineDialog(parent), m_line(line)
 
 void VectorGraphicsInterpreterLineDialog::m_startPointOnTextEnter( wxCommandEvent& event )
 {
-// TODO: Implement m_startPointOnTextEnter
+	if (m_validator.convertToPoint(std::string(m_startPoint->GetLineText(0)))) {
+		m_line->setPoint(m_validator.getX(), m_validator.getY(), true);
+	}
+	else {
+		m_startPoint->SetLabel(wxString("(" + std::to_string((int)m_line->getPoint(true).getX()) + ", " + std::to_string((int)m_line->getPoint(true).getY()) + ")"));
+	}
 }
 
 void VectorGraphicsInterpreterLineDialog::m_endPointOnTextEnter( wxCommandEvent& event )
 {
-// TODO: Implement m_endPointOnTextEnter
+	if (m_validator.convertToPoint(std::string(m_endPoint->GetLineText(0)))) {
+		m_line->setPoint(m_validator.getX(), m_validator.getY(), false);
+	}
+	else {
+		m_endPoint->SetLabel(wxString("(" + std::to_string((int)m_line->getPoint(false).getX()) + ", " + std::to_string((int)m_line->getPoint(false).getY()) + ")"));
+	}
 }
 
 void VectorGraphicsInterpreterLineDialog::m_colourOnTextEnter( wxCommandEvent& event )
 {
-// TODO: Implement m_colourOnTextEnter
+	if (m_validator.convertToColour(std::string(m_colour->GetLineText(0)))) {
+		m_line->setColour(wxColour(m_validator.getColour()));
+	}
+	else {
+		m_colour->SetLabel(wxString(m_line->getHexadecimalColour(true)));
+	}
 }
 
 void VectorGraphicsInterpreterLineDialog::m_transformVectorOnTextEnter( wxCommandEvent& event )
 {
-// TODO: Implement m_transformVectorOnTextEnter
+	if (m_validator.convertToPoint(std::string(m_transformVector->GetLineText(0)))) {
+		m_line->setTransform(m_validator.getX(), m_validator.getY());
+	}
+	else {
+		m_transformVector->SetLabel(wxString("(" + std::to_string((int)m_line->getTransform().getX()) + ", " + std::to_string((int)m_line->getTransform().getY()) + ")"));
+	}
 }
 
 void VectorGraphicsInterpreterLineDialog::m_rotationAngleOnTextEnter( wxCommandEvent& event )
 {
-// TODO: Implement m_rotationAngleOnTextEnter
+	try {
+		int rAngle = std::stoi(std::string(m_rotationAngle->GetLineText(0)));
+		m_line->rotate(rAngle, m_line->getRotateX(), m_line->getRotateY());
+	}
+	catch (const std::invalid_argument&) {
+		m_rotationAngle->SetLabel(wxString(std::to_string((int)m_line->getRotationAngle())));
+	}
 }
 
 void VectorGraphicsInterpreterLineDialog::m_deleteButtonOnButtonClick( wxCommandEvent& event )
 {
-// TODO: Implement m_deleteButtonOnButtonClick
+	EndModal(101);
 }

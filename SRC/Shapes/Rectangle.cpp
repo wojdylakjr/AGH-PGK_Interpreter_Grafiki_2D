@@ -1,5 +1,5 @@
 #include "Rectangle.h"
-#include <vector>
+//#include <vector>
 
 ShapeRectangle::ShapeRectangle(double x1, double y1, double x2, double y2, wxColor color) : Shape(color) {
 	m_leftDownPoint.setX(x1);
@@ -19,7 +19,7 @@ void ShapeRectangle::draw(wxBufferedDC* dc, double w, double h, Panel panel) {
 
 
 
-	std::vector<Point> vertices = { m_leftDownPoint, m_rightUpPoint };
+	vertices = { m_leftDownPoint, m_rightUpPoint };
 
 	for (auto&& vertice : vertices)
 	{
@@ -44,13 +44,13 @@ std::string ShapeRectangle::getTypeName() {
 
 std::string ShapeRectangle::getParameters() {
 	std::string temp = "rectangle ";
-	temp += std::to_string((int)m_leftDownPoint.getX());
+	temp += std::to_string((int)vertices[0].getX());
 	temp += " ";
-	temp += std::to_string((int)m_leftDownPoint.getY());
+	temp += std::to_string((int)(vertices[0].getY()));
 	temp += " ";
-	temp += std::to_string((int)m_rightUpPoint.getX());
+	temp += std::to_string((int)vertices[1].getX());
 	temp += " ";
-	temp += std::to_string((int)m_rightUpPoint.getY());
+	temp += std::to_string((int)(vertices[1].getY()));
 	temp += " ";
 	temp += m_color.GetAsString(wxC2S_HTML_SYNTAX);
 	return temp;

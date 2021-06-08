@@ -144,7 +144,12 @@
   <ItemGroup>
     <ClInclude Include="CommandValidator\CommandValidator.h" />
     <ClInclude Include="CommandValidator\StringSplit.h" />
+    <ClInclude Include="Dialogs\DialogValidator.h" />
+    <ClInclude Include="Dialogs\VectorGraphicsInterpreterArcDialog.h" />
+    <ClInclude Include="Dialogs\VectorGraphicsInterpreterCircleDialog.h" />
+    <ClInclude Include="Dialogs\VectorGraphicsInterpreterEllipseDialog.h" />
     <ClInclude Include="Dialogs\VectorGraphicsInterpreterLineDialog.h" />
+    <ClInclude Include="Dialogs\VectorGraphicsInterpreterRectangleDialog.h" />
     <ClInclude Include="GUI\GUI.h" />
     <ClInclude Include="GUI\VectorGraphicsInterpreterGUI.h" />
     <ClInclude Include="Panel\Panel.h" />
@@ -158,7 +163,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CommandValidator\CommandValidator.cpp" />
+    <ClCompile Include="Dialogs\DialogValidator.cpp" />
+    <ClCompile Include="Dialogs\VectorGraphicsInterpreterArcDialog.cpp" />
+    <ClCompile Include="Dialogs\VectorGraphicsInterpreterCircleDialog.cpp" />
+    <ClCompile Include="Dialogs\VectorGraphicsInterpreterEllipseDialog.cpp" />
     <ClCompile Include="Dialogs\VectorGraphicsInterpreterLineDialog.cpp" />
+    <ClCompile Include="Dialogs\VectorGraphicsInterpreterRectangleDialog.cpp" />
     <ClCompile Include="GUI\GUI.cpp" />
     <ClCompile Include="GUI\VectorGraphicsInterpreterGUI.cpp" />
     <ClCompile Include="main.cpp" />

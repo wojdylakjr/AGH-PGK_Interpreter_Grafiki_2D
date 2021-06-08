@@ -1,6 +1,7 @@
 #pragma once
 #include"Shape.h"
 #include"Point.h"
+#include <vector>
 
 
 class ShapeRectangle : public Shape
@@ -15,4 +16,5 @@ public:
 private:
 	Point m_leftDownPoint;
 	Point m_rightUpPoint;
+	std::vector<Point> vertices;
 };

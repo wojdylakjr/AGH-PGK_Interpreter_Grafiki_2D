@@ -14,7 +14,7 @@ void Shape::transform(double x, double y) {
 void Shape::rotate(double angle, double x, double y) {
 	m_rotateX = x;
 	m_rotateY = y;
-	m_rotateAngle = angle;
+	m_rotateAngle = angle ;
 }
 
 int Shape::getId() const {
@@ -40,6 +40,12 @@ void Shape::darken() {
 
 bool Shape::isHighlighted() {
 	return m_highlight;
+}
+
+void Shape::setTransform(double x, double y)
+{
+	m_transformX = x;
+	m_transformY = y;
 }
 
 void Shape::setName(std::string name) {
@@ -81,5 +87,15 @@ name_code Shape::hashName()
 	if (getTypeName() == "circle") return circle;
 	if (getTypeName() == "ellipse") return ellipse;
 	if (getTypeName() == "arc") return arc;
+}
+
+double Shape::getRotateX() const
+{
+	return m_rotateX;
+}
+
+double Shape::getRotateY() const
+{
+	return m_rotateY;
 }
 

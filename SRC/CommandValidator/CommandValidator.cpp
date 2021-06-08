@@ -287,11 +287,16 @@ bool CommandValidator::validateCommandClear(const std::vector<std::string>& inst
 }
 
 bool CommandValidator::validateCommandWrite(const std::vector<std::string>& instructions) {
-
+	if (!checkNumberOfArguments(instructions, 0u)) {
+		return false;
+	}
 	return true;
 }
 
 bool CommandValidator::validateCommandRead(const std::vector<std::string>& instructions) {
+	if (!checkNumberOfArguments(instructions, 0u)) {
+		return false;
+	}
 	return true;
 }
 

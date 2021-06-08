@@ -46,6 +46,13 @@ public:
 	int getId() const;
 
 	/**
+	 * sets rotation vector
+	 * @param double
+	 * @param double
+	 */
+	virtual void setTransform(double x, double y) final;
+
+	/**
 	 * sets field name
 	 * @param std::string
 	 */
@@ -88,6 +95,18 @@ public:
 	 * @return name_code
 	 */
 	virtual name_code hashName() final;
+
+	/**
+	 * returns rotate x
+	 * @return double
+	 */
+	double getRotateX() const;
+
+	/**
+	 * returns rotate y
+	 * @return double
+	 */
+	double getRotateY() const;
 
 protected:
 	int m_id;

@@ -55,7 +55,7 @@ void ShapeEllipse::draw(wxBufferedDC* dc, double w, double h, Panel panel) {
 }
 
 std::string ShapeEllipse::getTypeName() {
-	return "Ellipse";
+	return "ellipse";
 }
 
 std::string ShapeEllipse::getParameters() {
@@ -70,4 +70,30 @@ std::string ShapeEllipse::getParameters() {
 	temp += " ";
 	temp += m_color.GetAsString(wxC2S_HTML_SYNTAX);
 	return temp;
+}
+
+Point ShapeEllipse::getCenter()
+{
+	return m_centerOfEllipse;
+}
+
+double ShapeEllipse::getShaft(bool horizontal)
+{
+	return horizontal ? m_radiusX : m_radiusY;
+}
+
+void ShapeEllipse::setCenter(double x, double y)
+{
+	m_centerOfEllipse.setX(x);
+	m_centerOfEllipse.setY(y);
+}
+
+void ShapeEllipse::setShaft(double shaft, bool horizontal)
+{
+	if (horizontal) {
+		m_radiusX = shaft;
+	}
+	else {
+		m_radiusY = shaft;
+	}
 }

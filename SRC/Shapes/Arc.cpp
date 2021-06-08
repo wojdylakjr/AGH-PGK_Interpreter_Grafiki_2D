@@ -91,6 +91,48 @@ std::string ShapeArc::getParameters() {
 	return temp;
 }
 
+Point ShapeArc::getCenter()
+{
+	return m_centerOfArc;
+}
+
+double ShapeArc::getShaft(bool horizontal)
+{
+	return horizontal ? m_radiusX : m_radiusY;
+}
+
+double ShapeArc::getAngle(bool begin)
+{
+	return begin ? m_beginAngle : m_endAngle;
+}
+
+void ShapeArc::setCenter(double x, double y)
+{
+	m_centerOfArc.setX(x);
+	m_centerOfArc.setY(y);
+}
+
+void ShapeArc::setShaft(double shaft, bool horizontal)
+{
+	if (horizontal) {
+		m_radiusX = shaft;
+	}
+	else {
+		m_radiusY = shaft;
+	}
+}
+
+void ShapeArc::setAngle(double angle, bool begin)
+{
+	if (begin) {
+		m_beginAngle = angle;
+	}
+	else {
+		m_endAngle = angle;
+	}
+}
+
+
 Point m_centerOfArc;
 double m_radiusX;
 double m_radiusY;
