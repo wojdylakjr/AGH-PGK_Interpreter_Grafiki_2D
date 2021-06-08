@@ -55,3 +55,25 @@ std::string ShapeRectangle::getParameters() {
 	temp += m_color.GetAsString(wxC2S_HTML_SYNTAX);
 	return temp;
 }
+
+Point ShapeRectangle::getPoint(bool bottomLeft)
+{
+	if (bottomLeft) {
+		return m_leftDownPoint;
+	}
+	else {
+		return m_rightUpPoint;
+	}
+}
+
+void ShapeRectangle::setPoint(double x, double y, bool bottomLeft)
+{
+	if (bottomLeft) {
+		m_leftDownPoint.setX(x);
+		m_leftDownPoint.setY(y);
+	}
+	else {
+		m_rightUpPoint.setX(x);
+		m_rightUpPoint.setY(y);
+	}
+}

@@ -50,3 +50,24 @@ std::string ShapeCircle::getParameters() {
 	temp += m_color.GetAsString(wxC2S_HTML_SYNTAX);
 	return temp;
 }
+
+Point ShapeCircle::getCenter()
+{
+	return m_centerOfCircle;
+}
+
+double ShapeCircle::getRadius()
+{
+	return m_radius;
+}
+
+void ShapeCircle::setCenter(double x, double y)
+{
+	m_centerOfCircle.setX(x);
+	m_centerOfCircle.setY(y);
+}
+
+void ShapeCircle::setRadius(double radius)
+{
+	m_radius = radius;
+}

@@ -13,6 +13,22 @@ public:
 	std::string getTypeName() override;
 	std::string getParameters() override;
 
+	/**
+	 * returns bottom left Point if start, top right Point otherwise
+	 * @param bool
+	 * @return Point
+	 */
+	Point getPoint(bool bottomLeft);
+
+	/**
+	 * sets Point with given arguments
+	 * if bottom left sets bottom left Point, top right Point otherwise
+	 * @param double
+	 * @param double
+	 * @param bool
+	 */
+	void setPoint(double x, double y, bool bottomLeft);
+
 private:
 	Point m_leftDownPoint;
 	Point m_rightUpPoint;
