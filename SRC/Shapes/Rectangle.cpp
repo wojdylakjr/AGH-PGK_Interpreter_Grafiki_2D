@@ -16,10 +16,11 @@ void ShapeRectangle::draw(wxBufferedDC* dc, double w, double h, Panel panel) {
 	double Sx = (double)w / (panel.getRightUpPoint().getX() - panel.getLeftDownPoint().getX());
 	double Sy = (double)h / (panel.getRightUpPoint().getY() - panel.getLeftDownPoint().getY());
 
+	Point a(m_leftDownPoint.getX(), m_rightUpPoint.getY());
+	Point b(m_rightUpPoint.getX(), m_leftDownPoint.getY());
 
 
-
-	vertices = { m_leftDownPoint, m_rightUpPoint };
+	vertices = { m_leftDownPoint, b, m_rightUpPoint, a };
 
 	for (auto&& vertice : vertices)
 	{
@@ -34,8 +35,11 @@ void ShapeRectangle::draw(wxBufferedDC* dc, double w, double h, Panel panel) {
 		vertice.scalePoint(Sx, Sy);
 	}
 
-	wxPoint points[4] = { wxPoint(vertices[0].getX(),h - 1 - vertices[0].getY()), wxPoint(vertices[0].getX(),h - 1 - vertices[1].getY()) ,wxPoint(vertices[1].getX(), h - 1 - vertices[1].getY()), wxPoint(vertices[1].getX(),  h - 1 - vertices[0].getY()) };
+	wxPoint points[4] = { wxPoint(vertices[0].getX(),h - 1 - vertices[0].getY()), wxPoint(vertices[1].getX(),h - 1 - vertices[1].getY()) ,wxPoint(vertices[2].getX(), h - 1 - vertices[2].getY()), wxPoint(vertices[3].getX(),  h - 1 - vertices[3].getY()) };
 	dc->DrawPolygon(4, points);
+
+
+
 }
 
 std::string ShapeRectangle::getTypeName() {
@@ -48,9 +52,9 @@ std::string ShapeRectangle::getParameters() {
 	temp += " ";
 	temp += std::to_string((int)(vertices[0].getY()));
 	temp += " ";
-	temp += std::to_string((int)vertices[1].getX());
+	temp += std::to_string((int)vertices[2].getX());
 	temp += " ";
-	temp += std::to_string((int)(vertices[1].getY()));
+	temp += std::to_string((int)(vertices[2].getY()));
 	temp += " ";
 	temp += m_color.GetAsString(wxC2S_HTML_SYNTAX);
 	return temp;
