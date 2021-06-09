@@ -519,14 +519,15 @@ void VectorGraphicsInterpreterGUI::commandWrite()
 		wxString path = dialog.GetPath() + dialog.GetName();
 		std::ofstream file(path.ToStdString());
 		file << "clear" << "\n";
-		file << "range " << std::to_string((int)m_drawPanel.getLeftDownPoint().getX()) << " " << std::to_string((int)m_drawPanel.getLeftDownPoint().getY()) 
-			<< " " << std::to_string((int)m_drawPanel.getRightUpPoint().getX()) << " " << std::to_string((int)m_drawPanel.getRightUpPoint().getY()) << "\n";
+		file << "range -5000 -5000 5000 5000 \n";
 
 		for (Shape* shape : m_shapes) {
 			file << shape->getParameters();
 			file << "\n";
 		}
 		file << m_fillCommands;
+		file << "range " << std::to_string((int)m_drawPanel.getLeftDownPoint().getX()) << " " << std::to_string((int)m_drawPanel.getLeftDownPoint().getY())
+			<< " " << std::to_string((int)m_drawPanel.getRightUpPoint().getX()) << " " << std::to_string((int)m_drawPanel.getRightUpPoint().getY()) << "\n";
 		file.close();
 	}
 
