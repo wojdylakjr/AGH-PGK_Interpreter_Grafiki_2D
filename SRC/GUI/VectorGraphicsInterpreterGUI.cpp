@@ -228,7 +228,8 @@ void VectorGraphicsInterpreterGUI::commandRotate()
 		{
 			if (shape->getId() == id)
 			{
-				shape->rotate(rotationCoordinates[3], rotationCoordinates[1], rotationCoordinates[2]);
+				//shape->rotate(rotationCoordinates[3], rotationCoordinates[1], rotationCoordinates[2]);
+				shape->rotate(360.0 - static_cast<double>(rotationCoordinates[3]), static_cast<double>(rotationCoordinates[1]), static_cast<double>(rotationCoordinates[2]));
 				return;
 			}
 		}
@@ -512,6 +513,7 @@ void VectorGraphicsInterpreterGUI::commandWrite()
 		this->Refresh();
 		wxString path = dialog.GetPath() + dialog.GetName();
 		std::ofstream file(path.ToStdString());
+		file << "clear" << "\n";
 		file << "range " << std::to_string((int)m_drawPanel.getLeftDownPoint().getX()) << " " << std::to_string((int)m_drawPanel.getLeftDownPoint().getY()) 
 			<< " " << std::to_string((int)m_drawPanel.getRightUpPoint().getX()) << " " << std::to_string((int)m_drawPanel.getRightUpPoint().getY()) << "\n";
 
@@ -565,6 +567,9 @@ void VectorGraphicsInterpreterGUI::commandRead()
 				break;
 			case 6:		
 				commandArc();
+				break;
+			case 12:
+				commandClear();
 				break;
 			default:
 				break;
