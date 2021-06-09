@@ -465,6 +465,11 @@ void VectorGraphicsInterpreterGUI::commandFill()
 			if (shape->getId() == id) {
 				if (shape->getTypeName() != "arc" && shape->getTypeName() != "line") {
 					shape->setFillColour(m_commandValidator.getColour());
+					m_fillCommands += "fill ";
+					m_fillCommands += std::to_string(id);
+					m_fillCommands += " ";
+					m_fillCommands += shape -> getHexadecimalColour(0);
+					m_fillCommands += "\n";
 				}
 				else {
 					m_console->AppendText("\nObject \"" + shape->getTypeName() + "\" can`t be filled !");
@@ -521,6 +526,7 @@ void VectorGraphicsInterpreterGUI::commandWrite()
 			file << shape->getParameters();
 			file << "\n";
 		}
+		file << m_fillCommands;
 		file.close();
 	}
 
@@ -530,7 +536,7 @@ void VectorGraphicsInterpreterGUI::commandWrite()
 
 void VectorGraphicsInterpreterGUI::commandRead()
 {
-	wxString        file;
+	wxString file;
 	wxFileDialog fdlog(this, _("Read data"), "", "", "xyz files (*.)|*.xyz");
 	if (fdlog.ShowModal() != wxID_OK) return;
 	file.Clear();
@@ -567,6 +573,9 @@ void VectorGraphicsInterpreterGUI::commandRead()
 				break;
 			case 6:		
 				commandArc();
+				break;
+			case 7:		
+				commandFill();
 				break;
 			case 12:
 				commandClear();
