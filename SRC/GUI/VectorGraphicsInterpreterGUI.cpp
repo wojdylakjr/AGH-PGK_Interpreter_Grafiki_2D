@@ -545,7 +545,7 @@ void VectorGraphicsInterpreterGUI::commandRead()
 	while (!tfile.Eof())
 	{
 
-		if (!m_commandValidator.validate(static_cast<std::string>(str))) {
+		if (!m_commandValidator.validate(static_cast<std::string>(str), true)) {
 			m_console->AppendText(static_cast<wxString>(m_commandValidator.getHelpMessage()));
 		}
 		else {
