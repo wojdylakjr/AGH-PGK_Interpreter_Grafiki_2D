@@ -218,8 +218,17 @@ void VectorGraphicsInterpreterGUI::commandRotate()
 	std::vector<int> rotationCoordinates = m_commandValidator.getValues();
 	if (m_commandValidator.getAll()) {
 		for (Shape* shape : m_shapes)
-		{
-			shape->rotate(rotationCoordinates[2], rotationCoordinates[0], rotationCoordinates[1]);
+		{	
+			shape->rotate(360.0 - static_cast<double>(rotationCoordinates[2]), static_cast<double>(rotationCoordinates[0]), static_cast<double>(rotationCoordinates[1]));
+			m_rotateCommands += "rotate ";
+			m_rotateCommands += std::to_string(shape->getId());
+			m_rotateCommands += " ";
+			m_rotateCommands += std::to_string(static_cast<double>(rotationCoordinates[1]));
+			m_rotateCommands += " ";
+			m_rotateCommands += std::to_string(static_cast<double>(rotationCoordinates[2]));
+			m_rotateCommands += " ";
+			m_rotateCommands += std::to_string(static_cast<double>(rotationCoordinates[3]));
+			m_rotateCommands += "\n";
 		}
 	}
 	else {
@@ -230,6 +239,15 @@ void VectorGraphicsInterpreterGUI::commandRotate()
 			{
 				//shape->rotate(rotationCoordinates[3], rotationCoordinates[1], rotationCoordinates[2]);
 				shape->rotate(360.0 - static_cast<double>(rotationCoordinates[3]), static_cast<double>(rotationCoordinates[1]), static_cast<double>(rotationCoordinates[2]));
+				m_rotateCommands += "rotate ";
+				m_rotateCommands += std::to_string(shape->getId());
+				m_rotateCommands += " ";
+				m_rotateCommands += std::to_string(static_cast<double>(rotationCoordinates[1]));
+				m_rotateCommands += " ";
+				m_rotateCommands += std::to_string(static_cast<double>(rotationCoordinates[2]));
+				m_rotateCommands += " ";
+				m_rotateCommands += std::to_string(static_cast<double>(rotationCoordinates[3]));
+				m_rotateCommands += "\n";
 				return;
 			}
 		}
@@ -267,7 +285,14 @@ void VectorGraphicsInterpreterGUI::commandMove()
 	std::vector<int> moveCoordinates = m_commandValidator.getValues();
 	if (m_commandValidator.getAll()) {
 		for (Shape* shape : m_shapes)
-		{
+		{	
+			m_moveCommands += "move ";
+			m_moveCommands += std::to_string(shape->getId());
+			m_moveCommands += " ";
+			m_moveCommands += std::to_string(shape->getTransform().getX());
+			m_moveCommands += " ";
+			m_moveCommands += std::to_string(shape->getTransform().getY());
+			m_moveCommands += "\n";
 			shape->transform(moveCoordinates[0], moveCoordinates[1]);
 		}
 	}
@@ -276,7 +301,14 @@ void VectorGraphicsInterpreterGUI::commandMove()
 		for (Shape* shape : m_shapes)
 		{
 			if (shape->getId() == id)
-			{
+			{	
+				m_moveCommands += "move ";
+				m_moveCommands += std::to_string(shape->getId());
+				m_moveCommands += " ";
+				m_moveCommands += std::to_string(shape->getTransform().getX());
+				m_moveCommands += " ";
+				m_moveCommands += std::to_string(shape->getTransform().getY());
+				m_moveCommands += "\n";
 				shape->transform(moveCoordinates[1], moveCoordinates[2]);
 				return;
 			}
@@ -526,8 +558,10 @@ void VectorGraphicsInterpreterGUI::commandWrite()
 			file << "\n";
 		}
 		file << m_fillCommands;
+		file << m_moveCommands;
+		file << m_rotateCommands;
 		file << "range " << std::to_string((int)m_drawPanel.getLeftDownPoint().getX()) << " " << std::to_string((int)m_drawPanel.getLeftDownPoint().getY())
-			<< " " << std::to_string((int)m_drawPanel.getRightUpPoint().getX()) << " " << std::to_string((int)m_drawPanel.getRightUpPoint().getY()) << "\n";
+			 << " " << std::to_string((int)m_drawPanel.getRightUpPoint().getX()) << " " << std::to_string((int)m_drawPanel.getRightUpPoint().getY()) << "\n";
 		file.close();
 	}
 
@@ -546,6 +580,10 @@ void VectorGraphicsInterpreterGUI::commandRead()
 	wxString str;
 	wxTextFile tfile;
 	tfile.Open(file);
+
+	m_fillCommands.clear();
+	m_moveCommands.clear();
+	m_rotateCommands.clear();
 
 	m_console->AppendText(static_cast<wxString>("\n"));
 	str = tfile.GetFirstLine();
@@ -577,6 +615,12 @@ void VectorGraphicsInterpreterGUI::commandRead()
 				break;
 			case 7:		
 				commandFill();
+				break;
+			case 9:		
+				commandMove();
+				break;
+			case 10:	
+				commandRotate();
 				break;
 			case 12:
 				commandClear();

@@ -84,6 +84,10 @@ private:
 	/** number of lines in console */
 	unsigned long m_consoleLines = 0;
 
+	std::string m_fillCommands;
+	std::string m_moveCommands;
+	std::string m_rotateCommands;
+
 	/** console commands */
 	void commandRange();
 	void commandBackground();
