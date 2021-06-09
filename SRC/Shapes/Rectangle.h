@@ -32,5 +32,5 @@ public:
 private:
 	Point m_leftDownPoint;
 	Point m_rightUpPoint;
-	std::vector<Point> vertices;
+	
 };

@@ -17,9 +17,9 @@ void ShapeCircle::draw(wxBufferedDC* dc, double w, double h, Panel panel) {
 	double Sy = (double)h / (panel.getRightUpPoint().getY() - panel.getLeftDownPoint().getY());
 
 
-	R = m_radius * (Sx > Sy ? Sy : Sx);
+	double R = m_radius * (Sx > Sy ? Sy : Sx);
 
-	center = m_centerOfCircle;
+	Point center = m_centerOfCircle;
 
 	center.transformPoint(m_transformX, m_transformY);
 
@@ -41,11 +41,11 @@ std::string ShapeCircle::getTypeName() {
 
 std::string ShapeCircle::getParameters() {
 	std::string temp = "circle ";
-	temp += std::to_string((int)center.getX());
+	temp += std::to_string((int)m_centerOfCircle.getX());
 	temp += " ";
-	temp += std::to_string((int)center.getY());
+	temp += std::to_string((int)m_centerOfCircle.getY());
 	temp += " ";
-	temp += std::to_string((int)R);
+	temp += std::to_string((int)m_radius);
 	temp += " ";
 	temp += m_color.GetAsString(wxC2S_HTML_SYNTAX);
 	return temp;

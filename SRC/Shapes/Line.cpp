@@ -18,7 +18,7 @@ void ShapeLine::draw(wxBufferedDC* dc, double w, double h, Panel panel) {
 
 
 
-	vertices = { m_startPoint, m_endPoint };
+	std::vector<Point> vertices = { m_startPoint, m_endPoint };
 
 	for (auto&& vertice : vertices)
 	{
@@ -82,13 +82,13 @@ std::string ShapeLine::getTypeName() {
 
 std::string ShapeLine::getParameters() {
 	std::string temp = "line ";
-	temp += std::to_string((int)vertices[0].getX());
+	temp += std::to_string((int)m_startPoint.getX());
 	temp += " ";
-	temp += std::to_string((int)(vertices[0].getY()));
+	temp += std::to_string((int)m_startPoint.getY());
 	temp += " ";
-	temp += std::to_string((int)vertices[1].getX());
+	temp += std::to_string((int)m_endPoint.getX());
 	temp += " ";
-	temp += std::to_string((int)(vertices[1].getY()));
+	temp += std::to_string((int)m_endPoint.getY());
 	temp += " ";
 	temp += m_color.GetAsString(wxC2S_HTML_SYNTAX);
 	return temp;

@@ -29,7 +29,6 @@ public:
 	std::string getTypeName() override;
 	std::string getParameters() override;
 private:
-	std::vector<Point> vertices;
 	Point m_startPoint;
 	Point m_endPoint;
 };
