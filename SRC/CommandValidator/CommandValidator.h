@@ -32,7 +32,7 @@ private:
 	/** help message to be printed if input is invalid */
 	std::string m_helpMessage = "";
 
-	/** vector of double */
+	/** vector of integers */
 	std::vector<int> m_values;
 
 	/** regex used to validate colour */
@@ -40,6 +40,7 @@ private:
 
 	/** colur stored in unsigned long */
 	unsigned long m_colour = 0;
+	unsigned long m_colour_2 = 0;
 
 	/** current Panel size */
 	int m_bottomLeftCornerX = -1;
@@ -53,11 +54,11 @@ private:
 	// commands validation
 	bool validateCommandRange(const std::vector<std::string>& instructions);
 	bool validateCommandBackground(const std::vector<std::string>& instructions);
-	bool validateCommandLine(const std::vector<std::string>& instructions);
-	bool validateCommandRectangle(const std::vector<std::string>& instructions);
-	bool validateCommandCircle(const std::vector<std::string>& instructions);
-	bool validateCommandEllipse(const std::vector<std::string>& instructions);
-	bool validateCommandArc(const std::vector<std::string>& instructions);
+	bool validateCommandLine(const std::vector<std::string>& instructions, bool read);
+	bool validateCommandRectangle(const std::vector<std::string>& instructions, bool read);
+	bool validateCommandCircle(const std::vector<std::string>& instructions, bool read);
+	bool validateCommandEllipse(const std::vector<std::string>& instructions, bool read);
+	bool validateCommandArc(const std::vector<std::string>& instructions, bool read);
 	bool validateCommandFill(const std::vector<std::string>& instructions);
 	bool validateCommandDelete(const std::vector<std::string>& instructions);
 	bool validateCommandMove(const std::vector<std::string>& instructions);
@@ -111,7 +112,7 @@ public:
 	 * @param std::string
 	 * @return bool
 	 */
-	bool validate(std::string input);
+	bool validate(std::string input, bool read = false);
 
 	/**
 	 * returns ID of last entered command

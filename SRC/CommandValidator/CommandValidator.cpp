@@ -32,7 +32,17 @@ bool CommandValidator::validateCommandBackground(const std::vector<std::string>&
 	return true;
 }
 
-bool CommandValidator::validateCommandLine(const std::vector<std::string>& instructions) {
+bool CommandValidator::validateCommandLine(const std::vector<std::string>& instructions, bool read) {
+
+	if (read) {
+		convertToInt(instructions, 4u);
+		if (instructions.size() - 1 == 5u) {
+			convertToColour(instructions[5]);
+		} else {
+			m_colour = 0;
+		}
+		return true;
+	}
 
 	if (!checkNumberOfArguments(instructions, 4u, 5u)) {
 		return false;
@@ -59,7 +69,18 @@ bool CommandValidator::validateCommandLine(const std::vector<std::string>& instr
 
 }
 
-bool CommandValidator::validateCommandRectangle(const std::vector<std::string>& instructions) {
+bool CommandValidator::validateCommandRectangle(const std::vector<std::string>& instructions, bool read) {
+
+	if (read) {
+		convertToInt(instructions, 4u);
+		if (instructions.size() - 1 == 5u) {
+			convertToColour(instructions[5]);
+		}
+		else {
+			m_colour = 0;
+		}
+		return true;
+	}
 
 	if (!checkNumberOfArguments(instructions, 4u, 5u)) {
 		return false;
@@ -89,7 +110,18 @@ bool CommandValidator::validateCommandRectangle(const std::vector<std::string>& 
 	return true;
 }
 
-bool CommandValidator::validateCommandCircle(const std::vector<std::string>& instructions) {
+bool CommandValidator::validateCommandCircle(const std::vector<std::string>& instructions, bool read) {
+
+	if (read) {
+		convertToInt(instructions, 3u);
+		if (instructions.size() - 1 == 4u) {
+			convertToColour(instructions[4]);
+		}
+		else {
+			m_colour = 0;
+		}
+		return true;
+	}
 
 	if (!checkNumberOfArguments(instructions, 3u, 4u)) {
 		return false;
@@ -120,7 +152,18 @@ bool CommandValidator::validateCommandCircle(const std::vector<std::string>& ins
 	return true;
 }
 
-bool CommandValidator::validateCommandEllipse(const std::vector<std::string>& instructions) {
+bool CommandValidator::validateCommandEllipse(const std::vector<std::string>& instructions, bool read) {
+
+	if (read) {
+		convertToInt(instructions, 4u);
+		if (instructions.size() - 1 == 5u) {
+			convertToColour(instructions[5]);
+		}
+		else {
+			m_colour = 0;
+		}
+		return true;
+	}
 
 	if (!checkNumberOfArguments(instructions, 4u, 5u)) {
 		return false;
@@ -151,7 +194,18 @@ bool CommandValidator::validateCommandEllipse(const std::vector<std::string>& in
 	return true;
 }
 
-bool CommandValidator::validateCommandArc(const std::vector<std::string>& instructions) {
+bool CommandValidator::validateCommandArc(const std::vector<std::string>& instructions, bool read) {
+
+	if (read) {
+		convertToInt(instructions, 6u);
+		if (instructions.size() - 1 == 7u) {
+			convertToColour(instructions[7]);
+		}
+		else {
+			m_colour = 0;
+		}
+		return true;
+	}
 
 	if (!checkNumberOfArguments(instructions, 6u, 7u)) {
 		return false;
@@ -398,7 +452,7 @@ bool CommandValidator::checkIfPointExists(int x, int y) {
 
 /* -------------------- */
 
-bool CommandValidator::validate(std::string input) {
+bool CommandValidator::validate(std::string input, bool read) {
 
 	if (input.empty()) {
 		m_helpMessage = "";
@@ -423,15 +477,15 @@ bool CommandValidator::validate(std::string input) {
 	case 1:		// background
 		return validateCommandBackground(instructions);
 	case 2:		// line
-		return validateCommandLine(instructions);
+		return validateCommandLine(instructions, read);
 	case 3:		// rectangle
-		return validateCommandRectangle(instructions);
+		return validateCommandRectangle(instructions, read);
 	case 4:		// circle
-		return validateCommandCircle(instructions);
+		return validateCommandCircle(instructions, read);
 	case 5:		// ellipse
-		return validateCommandEllipse(instructions);
+		return validateCommandEllipse(instructions, read);
 	case 6:		// arc
-		return validateCommandArc(instructions);
+		return validateCommandArc(instructions, read);
 	case 7:		// fill
 		return validateCommandFill(instructions);
 	case 8:		// delete
