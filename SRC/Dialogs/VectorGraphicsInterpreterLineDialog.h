@@ -34,9 +34,10 @@ class VectorGraphicsInterpreterLineDialog : public LineDialog
 		VectorGraphicsInterpreterLineDialog( wxWindow* parent, ShapeLine* line );
 
 	private:
+		/** pointer to line */
 		ShapeLine* m_line;
+		/** dialog validator */
 		DialogValidator m_validator;
-
 };
 
 #endif // __VectorGraphicsInterpreterLineDialog__

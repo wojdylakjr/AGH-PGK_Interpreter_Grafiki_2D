@@ -32,13 +32,15 @@ class VectorGraphicsInterpreterArcDialog : public ArcDialog
 	//// end generated class members
 
 	private:
+		/** pointer to arc */
 		ShapeArc* m_arc;
+		/** dialog validator */
 		DialogValidator m_validator;
 
 	public:
 		/** Constructor connected with specific ellipse shape */
 		VectorGraphicsInterpreterArcDialog(wxWindow* parent, ShapeArc* arc);
-	
+
 };
 
 #endif // __VectorGraphicsInterpreterArcDialog__

@@ -30,7 +30,9 @@ class VectorGraphicsInterpreterCircleDialog : public CircleDialog
 	//// end generated class members
 	
 	private:
+		/** pointer to circle */
 		ShapeCircle* m_circle;
+		/** dialog validator */
 		DialogValidator m_validator;
 
 	public:

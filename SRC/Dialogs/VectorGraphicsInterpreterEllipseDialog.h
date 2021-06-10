@@ -32,7 +32,9 @@ class VectorGraphicsInterpreterEllipseDialog : public EllipseDialog
 	//// end generated class members
 	
 	private:
+		/** pointer to ellipse */
 		ShapeEllipse* m_ellipse;
+		/** dialog validator */
 		DialogValidator m_validator;
 
 	public:

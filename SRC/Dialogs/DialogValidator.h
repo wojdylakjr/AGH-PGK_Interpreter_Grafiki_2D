@@ -1,5 +1,10 @@
 #pragma once
 
+/**
+ * @file 
+ * Header for dialog validator class
+ */
+
 #include <stdexcept>
 #include <string>
 #include <regex>
@@ -7,6 +12,7 @@
 #include <sstream>
 #include <iterator>
 
+/** class responsible for validation of dialog inputs */
 class DialogValidator {
 
 private:

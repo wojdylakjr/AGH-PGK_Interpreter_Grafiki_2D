@@ -32,7 +32,9 @@ class VectorGraphicsInterpreterRectangleDialog : public RectangleDialog
 		VectorGraphicsInterpreterRectangleDialog(wxWindow* parent, ShapeRectangle* rectangle);
 
 private:
+	/** pointer to rectangle */
 	ShapeRectangle* m_rectangle;
+	/** dialog validator */
 	DialogValidator m_validator;
 };
 

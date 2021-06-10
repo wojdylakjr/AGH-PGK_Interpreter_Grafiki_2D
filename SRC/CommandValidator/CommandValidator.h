@@ -140,10 +140,7 @@ public:
 
 	/**
 	 * sets m_bottomLeftCorner and m_upRightCorner
-	 * @param int
-	 * @param int
-	 * @param int
-	 * @param int
+	 * @
 	 */
 	void setCorners(const Panel& panel);
 

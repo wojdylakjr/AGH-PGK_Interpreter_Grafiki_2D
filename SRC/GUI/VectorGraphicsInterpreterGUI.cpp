@@ -294,17 +294,10 @@ void VectorGraphicsInterpreterGUI::Repaint()
 	wxClientDC clientDc(m_workspace);
 	clientDc.GetSize(&width, &height);
 	m_picture = wxBitmap(width, height);
-	//
 	wxBufferedDC dc(&clientDc, m_picture);
-
-	m_picture = dc.GetSelectedBitmap();
-
 	
-	
-
 	dc.SetBackground(m_drawPanel.getBackgroundColor());
 	dc.Clear();
-	//dc.SetBackground(wxColor(255, 255, 255));
 	dc.SetBrush(wxBrush(wxColor(0, 0, 0)));
 	dc.SetBackgroundMode(wxTRANSPARENT);
 	dc.SetTextForeground(*wxBLACK);
@@ -313,28 +306,9 @@ void VectorGraphicsInterpreterGUI::Repaint()
 	int h = 0;
 	m_workspace->GetSize(&w, &h);
 
-	//wypisujemy rozmiar wektora _shapes, zwieksza sie ilosc po kazdym wywolaniu komendy line
-	std::string s1 = std::to_string(m_shapes.size());
-	dc.DrawText(s1, 300, 200);
-	std::vector<int> testValues = m_commandValidator.getValues();
-	//std::string s2 = std::to_string(w);
-	if (testValues.size() > 0) {
-		std::string s2 = std::to_string(testValues[0]);
-		dc.DrawText(s2, 300, 300);
-	}
-	std::string s3 = std::to_string(w);
-	dc.DrawText(s3, 300, 500);
-	std::string s4 = std::to_string(h);
-	dc.DrawText(s4, 400, 500);
-
-
-
-	//rysujemy po kolei kazdy obiekt
 	for (Shape* shape : m_shapes) {
 		shape->draw(&dc, w, h, m_drawPanel);
-	}
-	
-	
+	}	
 }
 
 void VectorGraphicsInterpreterGUI::commandClearcmd()
@@ -415,7 +389,6 @@ void VectorGraphicsInterpreterGUI::commandCircle()
 
 void VectorGraphicsInterpreterGUI::commandLine()
 {
-
 	std::vector<int> coordinates = m_commandValidator.getValues();
 	Shape* firstLine = new ShapeLine(coordinates[0], coordinates[1], coordinates[2], coordinates[3], m_commandValidator.getColour());
 	firstLine->setName("Line_" + std::to_string(m_shapesCounter[0]++));
@@ -430,7 +403,6 @@ void VectorGraphicsInterpreterGUI::commandLine()
 		
 	}
 	delete[] name;
-
 }
 
 void VectorGraphicsInterpreterGUI::commandArc()
@@ -675,24 +647,23 @@ void VectorGraphicsInterpreterGUI::commandRead()
 
 void VectorGraphicsInterpreterGUI::commandSave()
 {
-	//// TODO: Implement saveImageMenuItemSelected
 	std::vector<int> coordinates = m_commandValidator.getValues();
 	m_bitMapWidth = coordinates[0];
 	m_bitMapHeight = coordinates[1];
 	wxFileDialog dialog(this, _("Save image"), "", "", "bmp files (*.)|*.bmp", wxFD_SAVE | wxFD_OVERWRITE_PROMPT);
-	//m_picture = wxBitmap(m_bitMapWidth, m_bitMapHeight);
-
+	m_picture = wxBitmap(m_bitMapWidth, m_bitMapHeight);
 	if (dialog.ShowModal() == wxID_OK)
 	{
-		this->Refresh();
+		wxMemoryDC mdc(m_picture);
+		mdc.SetBackground(m_drawPanel.getBackgroundColor());
+		mdc.Clear();
+		mdc.SetBrush(wxBrush(wxColor(0, 0, 0)));
+		mdc.SetBackgroundMode(wxTRANSPARENT);
+		wxBufferedDC dc(&mdc, m_picture);
+		for (Shape* shape : m_shapes) {
+			shape->draw(&dc, m_bitMapWidth, m_bitMapHeight, m_drawPanel);
+		}
 		wxString path = dialog.GetPath() + dialog.GetName();
-
-		int w, h;
-		wxImage screenBufferImg = m_picture.ConvertToImage();
-		//screenBufferImg = screenBufferImg.Rescale(m_bitMapWidth, m_bitMapHeight);
-
 		m_picture.SaveFile(path, wxBITMAP_TYPE_BMP);
-		screenBufferImg.SaveFile(path, wxBITMAP_TYPE_BMP);
 	}
-	
 }

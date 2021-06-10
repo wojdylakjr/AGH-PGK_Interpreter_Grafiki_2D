@@ -25,12 +25,7 @@ void ShapeArc::draw(wxBufferedDC* dc, double w, double h, Panel panel) {
 	double beginRadians = (360.0 * M_PI / 180.0) - (m_beginAngle * M_PI / 180.0);
 	double endRadians = (360.0 * M_PI / 180.0) - (m_endAngle * M_PI / 180.0);
 	
-	double step =static_cast<double>( fabs(endRadians - beginRadians) / maxPoints);
-
-
-		
-	
-	
+	double step =static_cast<double>( fabs(endRadians - beginRadians) / maxPoints);	
 
 	std::vector<Point> arc;
 	if(beginRadians > endRadians)
@@ -42,12 +37,6 @@ void ShapeArc::draw(wxBufferedDC* dc, double w, double h, Panel panel) {
 		arc.push_back(point);
 	}
 	
-	
-	
-
-	
-	
-
 	int index = 0;
 	for (auto&& arcPoint : arc)
 	{
