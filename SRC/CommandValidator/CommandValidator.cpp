@@ -1,7 +1,6 @@
 #include "CommandValidator.h"
 #include "StringSplit.h"
 
-
 bool CommandValidator::validateCommandRange(const std::vector<std::string>& instructions) {
 
 	if (!checkNumberOfArguments(instructions, 4u)) {
@@ -541,5 +540,12 @@ bool CommandValidator::getAll() {
 		return true;
 	} else {
 		return false;
+	}
+}
+
+void CommandValidator::getIDs(std::string IDs, std::vector<int>& idsVec) {
+	std::vector<std::string> IDsStr = StringSplit::split(IDs);
+	for (int i = 0; i < IDsStr.size(); i++) {
+		idsVec.push_back(std::stoi(IDsStr[i]));
 	}
 }

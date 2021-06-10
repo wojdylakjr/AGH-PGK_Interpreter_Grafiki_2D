@@ -153,4 +153,10 @@ public:
 	 * @return bool
 	 */
 	bool getAll();
+
+	/**
+	 * returns vector of int containing Ids (for read command)
+	 */
+	void getIDs(std::string IDs, std::vector<int>& idsVec);
+
 };

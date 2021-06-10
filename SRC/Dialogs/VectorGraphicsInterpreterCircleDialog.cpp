@@ -18,7 +18,7 @@ CircleDialog(parent), m_circle(circle)
 	m_colour->SetLabel(wxString(m_circle->getHexadecimalColour(true)));
 	m_fillColour->SetLabel(wxString(m_circle->getHexadecimalColour(false)));
 	m_transformVector->SetLabel(wxString("(" + std::to_string((int)m_circle->getTransform().getX()) + ", " + std::to_string((int)m_circle->getTransform().getY()) + ")"));
-	m_rotationAngle->SetLabel(wxString(std::to_string((int)m_circle->getRotationAngle())));
+	m_rotationAngle->SetLabel(wxString(std::to_string((int)m_circle->getInputRotationAngle())));
 }
 
 void VectorGraphicsInterpreterCircleDialog::m_centerOnTextEnter( wxCommandEvent& event )
@@ -79,7 +79,7 @@ void VectorGraphicsInterpreterCircleDialog::m_rotationAngleOnTextEnter(wxCommand
 		m_circle->rotate(rAngle, m_circle->getRotateX(), m_circle->getRotateY());
 	}
 	catch (const std::invalid_argument&) {
-		m_rotationAngle->SetLabel(wxString(std::to_string((int)m_circle->getRotationAngle())));
+		m_rotationAngle->SetLabel(wxString(std::to_string((int)m_circle->getInputRotationAngle())));
 	}
 }
 

@@ -41,6 +41,11 @@ public:
 	 */
 	bool isHighlighted();
 
+	/**
+	 * retrurns if object is transparent
+	 */
+	bool isTransparent() const;
+
 	void transform(double x, double y);
 	void rotate(double angle, double x = 0, double y = 0);
 	int getId() const;
@@ -65,12 +70,6 @@ public:
 	std::string getName() const;
 
 	/**
-	 * sets m_counter to 0
-	 * invoked on clear command
-	 */
-	void setCounterToZero();
-
-	/**
 	 * returns colour in hexadecimal (eg: #000000)
 	 * if outline returns outline colour, fill colour otherwise
 	 * @param bool
@@ -91,6 +90,12 @@ public:
 	double getRotationAngle() const;
 
 	/**
+	 * returns input rotation angle
+	 * @return double
+	 */
+	double getInputRotationAngle() const;
+
+	/**
 	 * returns name as enum
 	 * @return name_code
 	 */
@@ -108,6 +113,21 @@ public:
 	 */
 	double getRotateY() const;
 
+	/**
+	 * sets object ID
+	 * used in read command
+	 * @param ID
+	 */
+	void setID(int ID);
+
+	static void setCounter(int counter);
+
+	/**
+	 * sets input rotation angle
+	 * @param angle
+	 */
+	void setInputRotationAngle(double angle);
+
 protected:
 	int m_id;
 	//kolejne zmienne, w zaleznosci od ktorych bedziemy rysowac obiekt, ustawiamy je w metodach transform i rotate
@@ -116,6 +136,7 @@ protected:
 	double m_rotateX = 0;
 	double m_rotateY = 0;
 	double m_rotateAngle = 0;
+	double m_inputRotateAngle = 0;
 
 	wxColor m_color;
 	wxColor m_fillColor;

@@ -20,7 +20,7 @@ ArcDialog(parent), m_arc(arc)
 	m_stopAngle->SetLabel(wxString(std::to_string((int)m_arc->getAngle(false))));
 	m_colour->SetLabel(wxString(m_arc->getHexadecimalColour(true)));
 	m_transformVector->SetLabel(wxString("(" + std::to_string((int)m_arc->getTransform().getX()) + ", " + std::to_string((int)m_arc->getTransform().getY()) + ")"));
-	m_rotationAngle->SetLabel(wxString(std::to_string((int)m_arc->getRotationAngle())));
+	m_rotationAngle->SetLabel(wxString(std::to_string((int)m_arc->getInputRotationAngle())));
 }
 
 void VectorGraphicsInterpreterArcDialog::m_centerOnTextEnter( wxCommandEvent& event )
@@ -104,7 +104,7 @@ void VectorGraphicsInterpreterArcDialog::m_rotationAngleOnTextEnter(wxCommandEve
 		m_arc->rotate(rAngle, m_arc->getRotateX(), m_arc->getRotateY());
 	}
 	catch (const std::invalid_argument&) {
-		m_rotationAngle->SetLabel(wxString(std::to_string((int)m_arc->getRotationAngle())));
+		m_rotationAngle->SetLabel(wxString(std::to_string((int)m_arc->getInputRotationAngle())));
 	}
 }
 

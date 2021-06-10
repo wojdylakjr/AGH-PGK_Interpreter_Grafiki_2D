@@ -18,7 +18,7 @@ VectorGraphicsInterpreterRectangleDialog::VectorGraphicsInterpreterRectangleDial
 	m_colour->SetLabel(wxString(m_rectangle->getHexadecimalColour(true)));
 	m_fillColour->SetLabel(wxString(m_rectangle->getHexadecimalColour(false)));
 	m_transformVector->SetLabel(wxString("(" + std::to_string((int)m_rectangle->getTransform().getX()) + ", " + std::to_string((int)m_rectangle->getTransform().getY()) + ")"));
-	m_rotationAngle->SetLabel(wxString(std::to_string((int)m_rectangle->getRotationAngle())));
+	m_rotationAngle->SetLabel(wxString(std::to_string((int)m_rectangle->getInputRotationAngle())));
 }
 
 void VectorGraphicsInterpreterRectangleDialog::m_startPointOnTextEnter( wxCommandEvent& event )
@@ -78,7 +78,7 @@ void VectorGraphicsInterpreterRectangleDialog::m_rotationAngleOnTextEnter( wxCom
 		m_rectangle->rotate(rAngle, m_rectangle->getRotateX(), m_rectangle->getRotateY());
 	}
 	catch (const std::invalid_argument&) {
-		m_rotationAngle->SetLabel(wxString(std::to_string((int)m_rectangle->getRotationAngle())));
+		m_rotationAngle->SetLabel(wxString(std::to_string((int)m_rectangle->getInputRotationAngle())));
 	}
 }
 

@@ -87,6 +87,7 @@ private:
 	std::string m_fillCommands;
 	std::string m_moveCommands;
 	std::string m_rotateCommands;
+	std::vector<int> m_IDs;
 
 	/** console commands */
 	void commandRange();
@@ -112,6 +113,12 @@ private:
 	 * @param object id / -1 if all
 	 */
 	void show(int id);
+
+	/**
+	 * updates objects list
+	 * used after read command
+	 */
+	void updateObjectsList();
 
 public:
 

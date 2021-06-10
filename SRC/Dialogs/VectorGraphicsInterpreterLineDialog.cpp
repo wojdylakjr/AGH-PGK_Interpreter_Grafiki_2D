@@ -17,7 +17,7 @@ LineDialog(parent), m_line(line)
 	m_endPoint->SetLabel(wxString("(" + std::to_string((int)m_line->getPoint(false).getX()) + ", " + std::to_string((int)m_line->getPoint(false).getY()) + ")"));
 	m_colour->SetLabel(wxString(m_line->getHexadecimalColour(true)));
 	m_transformVector->SetLabel(wxString("(" + std::to_string((int)m_line->getTransform().getX()) + ", " + std::to_string((int)m_line->getTransform().getY()) + ")"));
-	m_rotationAngle->SetLabel(wxString(std::to_string((int)m_line->getRotationAngle())));
+	m_rotationAngle->SetLabel(wxString(std::to_string((int)m_line->getInputRotationAngle())));
 }
 
 void VectorGraphicsInterpreterLineDialog::m_startPointOnTextEnter( wxCommandEvent& event )
@@ -67,7 +67,7 @@ void VectorGraphicsInterpreterLineDialog::m_rotationAngleOnTextEnter( wxCommandE
 		m_line->rotate(rAngle, m_line->getRotateX(), m_line->getRotateY());
 	}
 	catch (const std::invalid_argument&) {
-		m_rotationAngle->SetLabel(wxString(std::to_string((int)m_line->getRotationAngle())));
+		m_rotationAngle->SetLabel(wxString(std::to_string((int)m_line->getInputRotationAngle())));
 	}
 }
 

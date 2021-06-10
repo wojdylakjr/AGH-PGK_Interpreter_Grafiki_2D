@@ -79,9 +79,9 @@ std::string ShapeArc::getParameters() {
 	temp += " ";
 	temp += std::to_string((int)m_centerOfArc.getY());
 	temp += " ";
-	temp += std::to_string((int)m_radiusX);
+	temp += std::to_string((int)m_radiusX / 2);
 	temp += " ";
-	temp += std::to_string((int)m_radiusY);
+	temp += std::to_string((int)m_radiusY / 2);
 	temp += " ";
 	temp += std::to_string((int)m_beginAngle);
 	temp += " ";

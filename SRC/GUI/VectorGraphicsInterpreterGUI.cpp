@@ -219,16 +219,8 @@ void VectorGraphicsInterpreterGUI::commandRotate()
 	if (m_commandValidator.getAll()) {
 		for (Shape* shape : m_shapes)
 		{	
+			shape->setInputRotationAngle(static_cast<double>(rotationCoordinates[2]));
 			shape->rotate(360.0 - static_cast<double>(rotationCoordinates[2]), static_cast<double>(rotationCoordinates[0]), static_cast<double>(rotationCoordinates[1]));
-			m_rotateCommands += "rotate ";
-			m_rotateCommands += std::to_string(shape->getId());
-			m_rotateCommands += " ";
-			m_rotateCommands += std::to_string(static_cast<double>(rotationCoordinates[1]));
-			m_rotateCommands += " ";
-			m_rotateCommands += std::to_string(static_cast<double>(rotationCoordinates[2]));
-			m_rotateCommands += " ";
-			m_rotateCommands += std::to_string(static_cast<double>(rotationCoordinates[3]));
-			m_rotateCommands += "\n";
 		}
 	}
 	else {
@@ -237,17 +229,8 @@ void VectorGraphicsInterpreterGUI::commandRotate()
 		{
 			if (shape->getId() == id)
 			{
-				//shape->rotate(rotationCoordinates[3], rotationCoordinates[1], rotationCoordinates[2]);
+				shape->setInputRotationAngle(static_cast<double>(rotationCoordinates[2]));
 				shape->rotate(360.0 - static_cast<double>(rotationCoordinates[3]), static_cast<double>(rotationCoordinates[1]), static_cast<double>(rotationCoordinates[2]));
-				m_rotateCommands += "rotate ";
-				m_rotateCommands += std::to_string(shape->getId());
-				m_rotateCommands += " ";
-				m_rotateCommands += std::to_string(static_cast<double>(rotationCoordinates[1]));
-				m_rotateCommands += " ";
-				m_rotateCommands += std::to_string(static_cast<double>(rotationCoordinates[2]));
-				m_rotateCommands += " ";
-				m_rotateCommands += std::to_string(static_cast<double>(rotationCoordinates[3]));
-				m_rotateCommands += "\n";
 				return;
 			}
 		}
@@ -286,13 +269,6 @@ void VectorGraphicsInterpreterGUI::commandMove()
 	if (m_commandValidator.getAll()) {
 		for (Shape* shape : m_shapes)
 		{	
-			m_moveCommands += "move ";
-			m_moveCommands += std::to_string(shape->getId());
-			m_moveCommands += " ";
-			m_moveCommands += std::to_string(shape->getTransform().getX());
-			m_moveCommands += " ";
-			m_moveCommands += std::to_string(shape->getTransform().getY());
-			m_moveCommands += "\n";
 			shape->transform(moveCoordinates[0], moveCoordinates[1]);
 		}
 	}
@@ -302,13 +278,6 @@ void VectorGraphicsInterpreterGUI::commandMove()
 		{
 			if (shape->getId() == id)
 			{	
-				m_moveCommands += "move ";
-				m_moveCommands += std::to_string(shape->getId());
-				m_moveCommands += " ";
-				m_moveCommands += std::to_string(shape->getTransform().getX());
-				m_moveCommands += " ";
-				m_moveCommands += std::to_string(shape->getTransform().getY());
-				m_moveCommands += "\n";
 				shape->transform(moveCoordinates[1], moveCoordinates[2]);
 				return;
 			}
@@ -376,7 +345,7 @@ void VectorGraphicsInterpreterGUI::commandClearcmd()
 void VectorGraphicsInterpreterGUI::commandClear()
 {
 	if (!m_shapes.empty()) {
-		dynamic_cast<Shape*>(m_shapes[0])->setCounterToZero();
+		Shape::setCounter(0);
 		for (auto* shape : m_shapes) {
 			delete shape;
 		}
@@ -497,11 +466,6 @@ void VectorGraphicsInterpreterGUI::commandFill()
 			if (shape->getId() == id) {
 				if (shape->getTypeName() != "arc" && shape->getTypeName() != "line") {
 					shape->setFillColour(m_commandValidator.getColour());
-					m_fillCommands += "fill ";
-					m_fillCommands += std::to_string(id);
-					m_fillCommands += " ";
-					m_fillCommands += shape -> getHexadecimalColour(0);
-					m_fillCommands += "\n";
 				}
 				else {
 					m_console->AppendText("\nObject \"" + shape->getTypeName() + "\" can`t be filled !");
@@ -541,6 +505,23 @@ void VectorGraphicsInterpreterGUI::show(int id)
 	}
 }
 
+void VectorGraphicsInterpreterGUI::updateObjectsList()
+{
+	m_objectsList->Clear();
+	for (auto* shape : m_shapes) {
+		std::string nameStr = shape->getName();
+		char* name = new char[nameStr.size() + 1];
+		name[nameStr.size()] = '\0';
+		std::copy(nameStr.begin(), nameStr.end(), name);
+		char buffer[50];
+		if (sprintf(buffer, " %-17s %-4d", name, shape->getId())) {
+			m_objectsList->Append(wxString(buffer));
+		}
+		delete[] name;
+	}
+	
+}
+
 void VectorGraphicsInterpreterGUI::commandWrite()
 {
 	wxFileDialog dialog(this, _("Save data"), "", "", "xyz files (*.)|*.xyz", wxFD_SAVE | wxFD_OVERWRITE_PROMPT);
@@ -550,12 +531,48 @@ void VectorGraphicsInterpreterGUI::commandWrite()
 		this->Refresh();
 		wxString path = dialog.GetPath() + dialog.GetName();
 		std::ofstream file(path.ToStdString());
+
+		int id;
+		for (Shape* shape : m_shapes) {
+			id = shape->getId();
+			m_IDs.push_back(id);
+			file << std::to_string(id) << " ";
+		}
+		file << "\n";
+
 		file << "clear" << "\n";
 		file << "range -5000 -5000 5000 5000 \n";
 
 		for (Shape* shape : m_shapes) {
 			file << shape->getParameters();
 			file << "\n";
+
+			if (!shape->isTransparent()) {
+				m_fillCommands += "fill ";
+				m_fillCommands += std::to_string(shape->getId());
+				m_fillCommands += " ";
+				m_fillCommands += shape->getHexadecimalColour(0);
+				m_fillCommands += "\n";
+			}
+
+			m_rotateCommands += "rotate ";
+			m_rotateCommands += std::to_string(shape->getId());
+			m_rotateCommands += " ";
+			m_rotateCommands += std::to_string(shape->getRotateX());
+			m_rotateCommands += " ";
+			m_rotateCommands += std::to_string(shape->getRotateY());
+			m_rotateCommands += " ";
+			m_rotateCommands += std::to_string(shape->getInputRotationAngle());
+			m_rotateCommands += "\n";
+
+			m_moveCommands += "move ";
+			m_moveCommands += std::to_string(shape->getId());
+			m_moveCommands += " ";
+			m_moveCommands += std::to_string(shape->getTransform().getX());
+			m_moveCommands += " ";
+			m_moveCommands += std::to_string(shape->getTransform().getY());
+			m_moveCommands += "\n";
+
 		}
 		file << m_fillCommands;
 		file << m_moveCommands;
@@ -581,12 +598,18 @@ void VectorGraphicsInterpreterGUI::commandRead()
 	wxTextFile tfile;
 	tfile.Open(file);
 
+
+	m_shapesCounter = { 1, 1, 1, 1, 1 };
 	m_fillCommands.clear();
 	m_moveCommands.clear();
 	m_rotateCommands.clear();
+	m_IDs.clear();
 
 	m_console->AppendText(static_cast<wxString>("\n"));
 	str = tfile.GetFirstLine();
+	m_commandValidator.getIDs(std::string(str), m_IDs);
+	str = tfile.GetNextLine();
+	int i = 0;
 	while (!tfile.Eof())
 	{
 
@@ -600,18 +623,28 @@ void VectorGraphicsInterpreterGUI::commandRead()
 				break;
 			case 2:	
 				commandLine();
+				m_shapes[i]->setID(m_IDs[i]);
+				i++;
 				break;
 			case 3:		
 				commandRectangle();
+				m_shapes[i]->setID(m_IDs[i]);
+				i++;
 				break;
 			case 4:		
 				commandCircle();
+				m_shapes[i]->setID(m_IDs[i]);
+				i++;
 				break;
 			case 5:		
 				commandEllipse();
+				m_shapes[i]->setID(m_IDs[i]);
+				i++;
 				break;
 			case 6:		
 				commandArc();
+				m_shapes[i]->setID(m_IDs[i]);
+				i++;
 				break;
 			case 7:		
 				commandFill();
@@ -633,6 +666,8 @@ void VectorGraphicsInterpreterGUI::commandRead()
 		
 		str = tfile.GetNextLine();
 	}
+	Shape::setCounter(i);
+	updateObjectsList();
 	Repaint();
 
 }

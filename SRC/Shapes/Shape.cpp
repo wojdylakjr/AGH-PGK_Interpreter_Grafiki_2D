@@ -6,6 +6,11 @@ Shape::Shape(wxColor color) : m_color(color) {
 	m_counter++;
 }
 
+bool Shape::isTransparent() const
+{
+	return m_isTransparent;
+}
+
 void Shape::transform(double x, double y) {
 	m_transformX += x;
 	m_transformY += y;
@@ -56,8 +61,17 @@ std::string Shape::getName() const {
 	return m_name;
 }
 
-void Shape::setCounterToZero() {
-	m_counter = 0;
+void Shape::setCounter(int counter) {
+	m_counter = counter;
+}
+
+void Shape::setID(int ID) {
+	m_id = ID;
+}
+
+void Shape::setInputRotationAngle(double angle)
+{
+	m_inputRotateAngle = angle;
 }
 
 std::string Shape::getHexadecimalColour(bool outline) const
@@ -78,6 +92,11 @@ Point Shape::getTransform() const
 double Shape::getRotationAngle() const
 {
 	return m_rotateAngle;
+}
+
+double Shape::getInputRotationAngle() const
+{
+	return m_inputRotateAngle;
 }
 
 name_code Shape::hashName()

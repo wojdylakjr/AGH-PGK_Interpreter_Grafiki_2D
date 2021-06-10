@@ -19,7 +19,7 @@ EllipseDialog(parent), m_ellipse(ellipse)
 	m_colour->SetLabel(wxString(m_ellipse->getHexadecimalColour(true)));
 	m_fillColour->SetLabel(wxString(m_ellipse->getHexadecimalColour(false)));
 	m_transformVector->SetLabel(wxString("(" + std::to_string((int)m_ellipse->getTransform().getX()) + ", " + std::to_string((int)m_ellipse->getTransform().getY()) + ")"));
-	m_rotationAngle->SetLabel(wxString(std::to_string((int)m_ellipse->getRotationAngle())));
+	m_rotationAngle->SetLabel(wxString(std::to_string((int)m_ellipse->getInputRotationAngle())));
 }
 
 void VectorGraphicsInterpreterEllipseDialog::m_centerOnTextEnter( wxCommandEvent& event )
@@ -91,7 +91,7 @@ void VectorGraphicsInterpreterEllipseDialog::m_rotationAngleOnTextEnter(wxComman
 		m_ellipse->rotate(rAngle, m_ellipse->getRotateX(), m_ellipse->getRotateY());
 	}
 	catch (const std::invalid_argument&) {
-		m_rotationAngle->SetLabel(wxString(std::to_string((int)m_ellipse->getRotationAngle())));
+		m_rotationAngle->SetLabel(wxString(std::to_string((int)m_ellipse->getInputRotationAngle())));
 	}
 }
 
