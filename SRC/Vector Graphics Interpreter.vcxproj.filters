@@ -19,6 +19,9 @@
     <Filter Include="SRC\Dialogs">
       <UniqueIdentifier>{54a1997e-3804-4dde-a524-3d673c255ab5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="SRC\Resources">
+      <UniqueIdentifier>{7c678c87-6418-4d4c-8e52-9ba93a1fd7d0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CommandValidator\CommandValidator.h">
@@ -131,5 +134,10 @@
     <ClCompile Include="Dialogs\VectorGraphicsInterpreterRectangleDialog.cpp">
       <Filter>SRC\Dialogs</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon.xpm">
+      <Filter>SRC\Resources</Filter>
+    </None>
   </ItemGroup>
 </Project>
