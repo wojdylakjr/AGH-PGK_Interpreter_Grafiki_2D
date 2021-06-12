@@ -52,7 +52,7 @@ class GUI : public wxFrame
 	
 	public:
 		
-		GUI( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxEmptyString, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 1055,800 ), long style = wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL );
+		GUI( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = "Vector Graphics Interpreter", const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 1055,800 ), long style = wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL );
 		
 		~GUI();
 	

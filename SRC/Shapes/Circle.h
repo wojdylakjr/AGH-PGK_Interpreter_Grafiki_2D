@@ -7,10 +7,26 @@
 class ShapeCircle : public Shape
 {
 public:
+	/**
+	 * constructor setting coordinates of the center, radius and color of circle 
+	 * @param x and y coordinates of center point, radius and (hexadecimal) color
+	 */
 	ShapeCircle(double x, double y, double r, wxColor color);
+	/**
+	 * circle drawing method
+	 * @param bufferedDc and actual width and heigth of out panel
+	 */
 	void draw(wxBufferedDC* dc, double w, double h, Panel panel) override;
 
+	/**
+	 * returns shape name
+	 * @return "circle"
+	 */
 	std::string getTypeName() override;
+	/**
+	 * returns shape parameters as string
+	 * @return std::string coordinates of center and radius
+	 */
 	std::string getParameters() override;
 
 

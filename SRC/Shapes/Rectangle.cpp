@@ -1,5 +1,5 @@
 #include "Rectangle.h"
-//#include <vector>
+
 
 ShapeRectangle::ShapeRectangle(double x1, double y1, double x2, double y2, wxColor color) : Shape(color) {
 	m_leftDownPoint.setX(x1);
