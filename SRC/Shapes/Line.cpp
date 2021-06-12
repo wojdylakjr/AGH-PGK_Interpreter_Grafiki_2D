@@ -31,27 +31,8 @@ void ShapeLine::draw(wxBufferedDC* dc, double w, double h, Panel panel) {
 		vertice.scalePoint(Sx, Sy);
 	}
 
-	//m_startPoint.transformPoint(-panel.getLeftDownPoint().getX(), -panel.getLeftDownPoint().getY());
-	//m_endPoint.transformPoint(panel.getLeftDownPoint().getX(), -panel.getLeftDownPoint().getY());
-
-	//vertices[0].setY(panel.getRightUpPoint().getY() - vertices[0].getY());
-	//vertices[1].setY(panel.getRightUpPoint().getY() - vertices[1].getY());
 	wxPoint points[2] = { wxPoint(vertices[0].getX(), h - 1 - vertices[0].getY()), wxPoint(vertices[1].getX(), h - 1 - vertices[1].getY()) };
 	dc->DrawLine(points[0], points[1]);
-
-
-
-	std::string p1 = std::to_string(points[0].x);
-	dc->DrawText(p1, 200, 600);
-	std::string p2 = std::to_string(points[0].y);
-	dc->DrawText(p2, 300, 600);
-	std::string p3 = std::to_string(points[1].x);
-	dc->DrawText(p3, 400, 600);
-	std::string p4 = std::to_string(points[1].y);
-	dc->DrawText(p4, 500, 600);
-
-
-
 }
 
 Point ShapeLine::getPoint(bool start)

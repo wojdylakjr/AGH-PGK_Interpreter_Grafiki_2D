@@ -61,14 +61,16 @@ private:
 	/** array of shape instances */
 	std::array<unsigned, 5> m_shapesCounter{1, 1, 1, 1, 1};
 	
+	/** vector of shapes draw on Panel */
 	std::vector <Shape*> m_shapes;
+
+	/** draw panel */
 	Panel m_drawPanel;
-	//do zapisu pliku z informacja o obiekcie
+
+	/** string  with all commands to write to file*/
 	std::string m_cmdBuffer;
 
 	
-
-
 	/** command validator */
 	CommandValidator m_commandValidator;
 	/** current x position on workspace */
@@ -77,16 +79,23 @@ private:
 	int m_currentY = 0;
 	/** bitmap used in order to save to file */
 	wxBitmap m_picture;
-	wxImage screenBufferImg;
 
+	/* image to save to file*/
+	wxImage screenBufferImg;
+	
+	/** bitmap coordinates*/
 	wxCoord m_bitMapWidth = 2000;
 	wxCoord m_bitMapHeight = 2000;
+
 	/** number of lines in console */
 	unsigned long m_consoleLines = 0;
 
+	/**commands string buffer to write to file */
 	std::string m_fillCommands;
 	std::string m_moveCommands;
 	std::string m_rotateCommands;
+
+	/** vector of IDs*/
 	std::vector<int> m_IDs;
 
 	/** console commands */
@@ -126,29 +135,6 @@ public:
 	 * method painting workspace
 	 */
 	void Repaint();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 };
 

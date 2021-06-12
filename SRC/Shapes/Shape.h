@@ -1,9 +1,15 @@
 #pragma once
-
+/**
+ * @file
+ * abstract class to represent shape
+ */
 #include <wx/colour.h>
 #include <wx/dcbuffer.h>
 #include"../Panel/Panel.h"
 
+ /**
+  * enum with all shapes
+  */
 enum name_code {
 	line,
 	rectangle,
@@ -15,14 +21,39 @@ enum name_code {
 class Shape
 {
 public:
+	/**
+	 * default constructor
+	 */
 	Shape() = default;
-	//konstruktor, ustawia kolor obiektu oraz przypisuje mu id
+
+	/**
+	 *  constructor with wxColor color
+	 */
 	Shape(wxColor color);
 
-	void virtual draw(wxBufferedDC* dc, double Sx, double Sy, Panel panel) = 0;
-	std::string virtual getTypeName() = 0; //zwraca nazwe obiketu, czyli "line", "rectangle", "circle", "arc"
+	/**
+	 * virtual method to draw object
+	 */
+	void virtual draw(wxBufferedDC * dc, double Sx, double Sy, Panel panel) = 0;
+
+	/**
+	 * getter shape name
+	 */
+	std::string virtual getTypeName() = 0;
+
+	/**
+	 * method returns string with parameters formatted as same as command
+	 */
 	std::string virtual getParameters() = 0;
+
+	/**
+	 * setter to fill colour
+	 */
 	void setFillColour(wxColor fillColor);
+
+	/**
+	 * set edge colour
+	 */
 	void setColour(wxColor color);
 
 	/**
@@ -46,8 +77,19 @@ public:
 	 */
 	bool isTransparent() const;
 
+	/**
+	 * transform shsape
+	 */
 	void transform(double x, double y);
+
+	/**
+	 * rotate shape
+	 */
 	void rotate(double angle, double x = 0, double y = 0);
+
+	/**
+	* getter shape ID
+	*/
 	int getId() const;
 
 	/**
@@ -129,23 +171,40 @@ public:
 	void setInputRotationAngle(double angle);
 
 protected:
+	/**shape ID */
 	int m_id;
-	//kolejne zmienne, w zaleznosci od ktorych bedziemy rysowac obiekt, ustawiamy je w metodach transform i rotate
+
+	/** x length to transform point*/
 	double m_transformX = 0;
+
+	/** y length to transform point*/
 	double m_transformY = 0;
+
+	/** x value to roate point*/
 	double m_rotateX = 0;
+
+	/** y value to roate point*/
 	double m_rotateY = 0;
+
+	/** rotate angle*/
 	double m_rotateAngle = 0;
+
+	/** rotate angle seted by user*/
 	double m_inputRotateAngle = 0;
 
+	/** shape edge color*/
 	wxColor m_color;
+
+	/** hape fill color*/
 	wxColor m_fillColor;
 
+	/** shape name*/
 	std::string m_name;
 
 	bool m_isTransparent = true;
 	bool m_highlight = false;
 
 private:
+	/** used to set ID in constructor*/
 	static int m_counter;
 };

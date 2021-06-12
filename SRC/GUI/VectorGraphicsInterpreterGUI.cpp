@@ -20,21 +20,13 @@ void VectorGraphicsInterpreterGUI::workspaceOnMotion(wxMouseEvent& event)
 	int w, h;
 	m_workspace->GetSize(&w, &h);
 
-	//double Sx = (double)w / (m_drawPanel.getRightUpPoint().getX() - m_drawPanel.getLeftDownPoint().getX());
-	//double Sy = (double)h / (m_drawPanel.getRightUpPoint().getY() - m_drawPanel.getLeftDownPoint().getY());
-
 	double Sx = (double)w / (m_drawPanel.getLeftDownPoint().getX() - m_drawPanel.getRightUpPoint().getX());
 	double Sy = (double)h / (m_drawPanel.getLeftDownPoint().getY() - m_drawPanel.getRightUpPoint().getY());
 
 	double X, Y;
-	//X = (double)x / Sx + m_drawPanel.getLeftDownPoint().getX();
-	//Y = (double)y / Sy + m_drawPanel.getLeftDownPoint().getY();
-
 	X = -(double)x / Sx + m_drawPanel.getLeftDownPoint().getX();
 	Y = (double)y / Sy + m_drawPanel.getRightUpPoint().getY();
 
-	//X = floor(100 * X) / 100;
-	//Y = floor(100 * Y) / 100;
 	m_cursorPosition->SetLabel("    x = " + std::to_string((int)X) + "\n    y = " + std::to_string((int)Y));
 }
 
