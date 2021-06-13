@@ -211,7 +211,7 @@ void VectorGraphicsInterpreterGUI::commandRotate()
 	if (m_commandValidator.getAll()) {
 		for (Shape* shape : m_shapes)
 		{	
-			shape->setInputRotationAngle(static_cast<double>(rotationCoordinates[2]));
+			shape->setInputRotationAngle(static_cast<double>(rotationCoordinates[3]));
 			shape->rotate(360.0 - static_cast<double>(rotationCoordinates[2]), static_cast<double>(rotationCoordinates[0]), static_cast<double>(rotationCoordinates[1]));
 		}
 	}
@@ -221,7 +221,7 @@ void VectorGraphicsInterpreterGUI::commandRotate()
 		{
 			if (shape->getId() == id)
 			{
-				shape->setInputRotationAngle(static_cast<double>(rotationCoordinates[2]));
+				shape->setInputRotationAngle(static_cast<double>(rotationCoordinates[3]));
 				shape->rotate(360.0 - static_cast<double>(rotationCoordinates[3]), static_cast<double>(rotationCoordinates[1]), static_cast<double>(rotationCoordinates[2]));
 				return;
 			}
