@@ -1,4 +1,5 @@
 #include <wx/wx.h>
+#include "./Resources/icon.xpm"
 
 #include "GUI/VectorGraphicsInterpreterGUI.h"
 
@@ -16,8 +17,8 @@ IMPLEMENT_APP(VectorGraphicsInterpreterApp);
 bool VectorGraphicsInterpreterApp::OnInit()
 {
 	wxFrame* mainFrame = new VectorGraphicsInterpreterGUI(NULL);
+	mainFrame->SetIcon(icon_xpm);
 	mainFrame->Show(true);
 	SetTopWindow(mainFrame);
-
 	return true;
 }

@@ -16,6 +16,12 @@
     <Filter Include="SRC\Shapes">
       <UniqueIdentifier>{96e25a07-ab87-4100-86e3-88ad547eaf20}</UniqueIdentifier>
     </Filter>
+    <Filter Include="SRC\Dialogs">
+      <UniqueIdentifier>{54a1997e-3804-4dde-a524-3d673c255ab5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SRC\Resources">
+      <UniqueIdentifier>{7c678c87-6418-4d4c-8e52-9ba93a1fd7d0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CommandValidator\CommandValidator.h">
@@ -41,6 +47,36 @@
     </ClInclude>
     <ClInclude Include="Shapes\Shape.h">
       <Filter>SRC\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="Shapes\Rectangle.h">
+      <Filter>SRC\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="Shapes\Circle.h">
+      <Filter>SRC\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="Shapes\Ellipse.h">
+      <Filter>SRC\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="Shapes\Arc.h">
+      <Filter>SRC\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="Dialogs\DialogValidator.h">
+      <Filter>SRC\Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="Dialogs\VectorGraphicsInterpreterArcDialog.h">
+      <Filter>SRC\Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="Dialogs\VectorGraphicsInterpreterCircleDialog.h">
+      <Filter>SRC\Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="Dialogs\VectorGraphicsInterpreterEllipseDialog.h">
+      <Filter>SRC\Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="Dialogs\VectorGraphicsInterpreterLineDialog.h">
+      <Filter>SRC\Dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="Dialogs\VectorGraphicsInterpreterRectangleDialog.h">
+      <Filter>SRC\Dialogs</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -68,5 +104,40 @@
     <ClCompile Include="Shapes\Shape.cpp">
       <Filter>SRC\Shapes</Filter>
     </ClCompile>
+    <ClCompile Include="Shapes\Rectangle.cpp">
+      <Filter>SRC\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="Shapes\Circle.cpp">
+      <Filter>SRC\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="Shapes\Ellipse.cpp">
+      <Filter>SRC\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="Shapes\Arc.cpp">
+      <Filter>SRC\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialogs\DialogValidator.cpp">
+      <Filter>SRC\Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialogs\VectorGraphicsInterpreterArcDialog.cpp">
+      <Filter>SRC\Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialogs\VectorGraphicsInterpreterCircleDialog.cpp">
+      <Filter>SRC\Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialogs\VectorGraphicsInterpreterEllipseDialog.cpp">
+      <Filter>SRC\Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialogs\VectorGraphicsInterpreterLineDialog.cpp">
+      <Filter>SRC\Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="Dialogs\VectorGraphicsInterpreterRectangleDialog.cpp">
+      <Filter>SRC\Dialogs</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon.xpm">
+      <Filter>SRC\Resources</Filter>
+    </None>
   </ItemGroup>
 </Project>
