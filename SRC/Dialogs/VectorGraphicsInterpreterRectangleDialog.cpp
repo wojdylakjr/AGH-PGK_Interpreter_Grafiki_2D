@@ -75,7 +75,7 @@ void VectorGraphicsInterpreterRectangleDialog::m_rotationAngleOnTextEnter( wxCom
 {
 	try {
 		int rAngle = std::stoi(std::string(m_rotationAngle->GetLineText(0)));
-		m_rectangle->rotate(rAngle, m_rectangle->getRotateX(), m_rectangle->getRotateY());
+		m_rectangle->rotate(360.0 - rAngle, m_rectangle->getRotateX(), m_rectangle->getRotateY());
 	}
 	catch (const std::invalid_argument&) {
 		m_rotationAngle->SetLabel(wxString(std::to_string((int)m_rectangle->getInputRotationAngle())));

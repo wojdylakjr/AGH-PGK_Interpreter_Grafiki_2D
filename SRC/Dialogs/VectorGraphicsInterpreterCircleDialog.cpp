@@ -76,7 +76,7 @@ void VectorGraphicsInterpreterCircleDialog::m_rotationAngleOnTextEnter(wxCommand
 {
 	try {
 		int rAngle = std::stoi(std::string(m_rotationAngle->GetLineText(0)));
-		m_circle->rotate(rAngle, m_circle->getRotateX(), m_circle->getRotateY());
+		m_circle->rotate(360.0 - rAngle, m_circle->getRotateX(), m_circle->getRotateY());
 	}
 	catch (const std::invalid_argument&) {
 		m_rotationAngle->SetLabel(wxString(std::to_string((int)m_circle->getInputRotationAngle())));

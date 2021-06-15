@@ -101,7 +101,7 @@ void VectorGraphicsInterpreterArcDialog::m_rotationAngleOnTextEnter(wxCommandEve
 {
 	try {
 		int rAngle = std::stoi(std::string(m_rotationAngle->GetLineText(0)));
-		m_arc->rotate(rAngle, m_arc->getRotateX(), m_arc->getRotateY());
+		m_arc->rotate(360.0 - rAngle, m_arc->getRotateX(), m_arc->getRotateY());
 	}
 	catch (const std::invalid_argument&) {
 		m_rotationAngle->SetLabel(wxString(std::to_string((int)m_arc->getInputRotationAngle())));

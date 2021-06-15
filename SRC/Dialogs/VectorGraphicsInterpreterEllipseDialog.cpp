@@ -88,7 +88,7 @@ void VectorGraphicsInterpreterEllipseDialog::m_rotationAngleOnTextEnter(wxComman
 {
 	try {
 		int rAngle = std::stoi(std::string(m_rotationAngle->GetLineText(0)));
-		m_ellipse->rotate(rAngle, m_ellipse->getRotateX(), m_ellipse->getRotateY());
+		m_ellipse->rotate(360.0 - rAngle, m_ellipse->getRotateX(), m_ellipse->getRotateY());
 	}
 	catch (const std::invalid_argument&) {
 		m_rotationAngle->SetLabel(wxString(std::to_string((int)m_ellipse->getInputRotationAngle())));
